@@ -4,6 +4,9 @@ name: "docs-firecrawl-llm"
 description: "generate LLMs.txt using firecrawl"
 
 inputs:
+  GITHUB_TOKEN:
+    description: "github token to use"
+    required: true
   FIRECRAWL_API_KEY:
     description: "apikey to use"
     required: true
@@ -13,7 +16,7 @@ inputs:
   MAX_URLS:
     description: "maximum number of pages to crawl"
     required: false
-    default: 50
+    default: 25
   SHOW_FULL_TEXT:
     description: "generate llms-full.txt in addition to llms.txt"
     required: false
@@ -22,14 +25,14 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Checkout tools repo
+    - name: checkout tools repo
       uses: actions/checkout@v4
       with:
         repository: Consensys/github-actions
         ref: firecrawl 
         path: .github-actions
 
-    - name: Read .nvmrc
+    - name: read .nvmrc
       shell: bash
       run: echo "NODE_VERSION=$(cat .nvmrc)" >> $GITHUB_OUTPUT
       id: nvm
@@ -40,11 +43,42 @@ runs:
         registry-url: https://registry.npmjs.org/
         node-version-file: '.nvmrc'
 
-    - name: npm install
+    - name: npm install and run 
       shell: bash
       run: |
         cd .github-actions/docs-firecrawl-llm
-        ls -la .
         npm ci 
-        ls -la .
+        npm run llms
+      env:
+        FIRECRAWL_API_KEY: ${{ inputs.FIRECRAWL_API_KEY }}
+        TARGET_URL: ${{ inputs.TARGET_URL }}
+        MAX_URLS: ${{ inputs.MAX_URLS }}
+        SHOW_FULL_TEXT: ${{ inputs.SHOW_FULL_TEXT }}
 
+    - name: debug
+      shell: bash
+      run: |
+        ls -la .github-actions/docs-firecrawl-llm/output
+
+    - name: move assets to static folder for docusaurus
+      shell: bash
+      run: |
+        mv .github-actions/docs-firecrawl-llm/output/*.txt ./static/
+
+    - name: create pull request
+      shell: bash    
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+        base_branch=$(git remote show origin | grep 'HEAD branch' | awk '{print $3}')
+        branch_date=$(date '+%Y%m%d-%H%M%S')
+        branch_to_merge="llms-$branch_date"
+        
+        git checkout -b $branch_to_merge
+        git add ./static/
+        git commit -m "Updating llms as at $branch_date"
+        git push origin $branch_to_merge
+
+        gh pr create -B $base_branch -H $branch_to_merge --title "Update LLMs as at $branch_date" --body "Created by github action"
+      env:
+          GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
