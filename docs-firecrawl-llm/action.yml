@@ -1,0 +1,50 @@
+# SPDX-License-Identifier: Apache-2.0
+---
+name: "docs-firecrawl-llm"
+description: "generate LLMs.txt using firecrawl"
+
+inputs:
+  FIRECRAWL_API_KEY:
+    description: "apikey to use"
+    required: true
+  TARGET_URL:
+    description: "base url to crawl"
+    required: true
+  MAX_URLS:
+    description: "maximum number of pages to crawl"
+    required: false
+    default: 50
+  SHOW_FULL_TEXT:
+    description: "generate llms-full.txt in addition to llms.txt"
+    required: false
+    default: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout tools repo
+      uses: actions/checkout@v4
+      with:
+        repository: Consensys/github-actions
+        ref: firecrawl 
+        path: .github-actions
+
+    - name: Read .nvmrc
+      shell: bash
+      run: echo "NODE_VERSION=$(cat .nvmrc)" >> $GITHUB_OUTPUT
+      id: nvm
+      
+    - name: Use Node.js ${{ steps.nvm.outputs.NODE_VERSION }}
+      uses: actions/setup-node@v4
+      with:
+        registry-url: https://registry.npmjs.org/
+        node-version-file: '.nvmrc'
+
+    - name: npm install
+      shell: bash
+      run: |
+        cd .github-actions/docs-firecrawl-llm
+        ls -la .
+        npm ci 
+        ls -la .
+
