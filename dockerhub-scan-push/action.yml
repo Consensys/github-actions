@@ -1,0 +1,108 @@
+# SPDX-License-Identifier: Apache-2.0
+---
+name: 'ecr-scan-push'
+description: 'Composite action to build, scan and push a container'
+
+
+inputs:
+  DOCKER_CONTEXT_PATH:
+    description: "the location of the Dockerfile"
+    required: false
+    default: "./"
+  DOCKER_REPO:
+    description: "the repo of the docker image"
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout tools repo
+      uses: actions/checkout@v4
+      with:
+        repository: Consensys/github-actions
+        path: .github-actions
+
+    - name: set up docker buildx
+      uses: docker/setup-buildx-action@v3   
+  
+    - name: prep for container
+      shell: bash
+      run: |
+        echo "BUILD_DATE=$(date --rfc-3339=date)" >> ${GITHUB_ENV}
+
+    - name: build the container
+      uses: docker/build-push-action@v6
+      env:
+        DOCKER_BUILD_SUMMARY: false
+      with:
+        context:  ${{ inputs.DOCKER_CONTEXT_PATH }} 
+        platforms: linux/amd64,linux/arm64
+        provenance: mode=max
+        sbom: true
+        push: false
+        cache-from: type=local,src=/tmp/.buildx-cache
+        cache-to: type=local,dest=/tmp/.buildx-cache  
+        build-args: |
+          VCS_REF=${{ github.sha }}
+          BUILD_DATE=${{ env.BUILD_DATE }}
+        tags: ${{ inputs.DOCKER_REPO }}:latest
+
+    - name: Run Trivy vulnerability scanner
+      uses: aquasecurity/trivy-action@0.33.0
+      with:
+        image-ref: ${{ inputs.DOCKER_REPO }}:latest
+        format: 'sarif'
+        output: 'trivy-results.sarif'
+        vuln-type: 'os,library'
+        severity: 'CRITICAL,HIGH'
+
+    - name: Show Trivy results
+      shell: bash
+      run: |
+        sudo apt-get update -y
+        sudo apt-get install -y jq
+        echo "## Trivy findings (CRITICAL/HIGH)" >> "$GITHUB_STEP_SUMMARY"
+        if [ ! -s trivy-results.sarif ]; then
+          echo "_No SARIF produced or file is empty._" >> "$GITHUB_STEP_SUMMARY"
+          exit 0
+        fi
+        jq -r '
+          .runs[].results[]?
+          | [.ruleId,
+              (.level|ascii_upcase),
+              (.message.text|tostring|gsub("\n"; " ")),
+              (.locations[0].physicalLocation.artifactLocation.uri // "?"),
+              (.locations[0].physicalLocation.region.startLine // 0)]
+          | @tsv
+        ' trivy-results.sarif \
+        | awk -F'\t' '
+          BEGIN {
+            print "| Rule | Level | Message | File | Line |";
+            print "|---|---|---|---|---|";
+          }
+          {
+            # Truncate overly long messages for summary readability
+            msg=$3; if (length(msg)>180) msg=substr(msg,1,180)"…";
+            printf("| `%s` | %s | %s | %s | %s |\n", $1, $2, msg, $4, $5);
+          }
+        ' >> "$GITHUB_STEP_SUMMARY"
+
+    - name: push the container
+      uses: docker/build-push-action@v6
+      if: success()        
+      env:
+        DOCKER_BUILD_SUMMARY: false
+      with:
+        context:  ${{ inputs.DOCKER_CONTEXT_PATH }} 
+        platforms: linux/amd64,linux/arm64
+        provenance: mode=max
+        sbom: true
+        push: true
+        cache-from: type=local,src=/tmp/.buildx-cache
+        cache-to: type=local,dest=/tmp/.buildx-cache  
+        build-args: |
+          VCS_REF=${{ github.sha }}
+          BUILD_DATE=${{ env.BUILD_DATE }}
+        tags: |
+          ${{ inputs.DOCKER_REPO }}:${{ env.BUILD_DATE }}
+          ${{ inputs.DOCKER_REPO }}:latest
