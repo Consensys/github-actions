@@ -20,7 +20,7 @@ runs:
   using: "composite"
   steps:
     - name: Checkout tools repo
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
       with:
         repository: Consensys/github-actions
         path: .github-actions
@@ -29,7 +29,7 @@ runs:
       uses: docker/setup-buildx-action@v3   
   
     - name: configure aws credentials
-      uses: aws-actions/configure-aws-credentials@v4
+      uses: aws-actions/configure-aws-credentials@v5
       with:
         role-to-assume: ${{ inputs.ECR_ROLE_TO_ASSUME }} 
         role-session-name: ecr-scan-push

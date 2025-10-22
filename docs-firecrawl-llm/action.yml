@@ -26,7 +26,7 @@ runs:
   using: "composite"
   steps:
     - name: checkout tools repo
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
       with:
         repository: Consensys/github-actions
         path: .github-actions
@@ -37,7 +37,7 @@ runs:
       id: nvm
       
     - name: Use Node.js ${{ steps.nvm.outputs.NODE_VERSION }}
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v6
       with:
         registry-url: https://registry.npmjs.org/
         node-version-file: '.nvmrc'

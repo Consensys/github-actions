@@ -8,14 +8,14 @@ runs:
   using: "composite"
   steps:
     - name: Checkout tools repo
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
       with:
         repository: Consensys/github-actions
         path: .github-actions
 
     # oras-project/setup-oras@v1
     - name: Setup oras
-      uses: oras-project/setup-oras@9c92598691bfef1424de2f8fae81941568f5889c
+      uses: oras-project/setup-oras@v1.2.4
         
     - name: Get current date
       id: date

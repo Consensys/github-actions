@@ -12,7 +12,7 @@ runs:
       id: nvm
       
     - name: Use Node.js ${{ steps.nvm.outputs.NODE_VERSION }}
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v6
       with:
         registry-url: https://registry.npmjs.org/
         node-version-file: '.nvmrc'
