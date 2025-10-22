@@ -4,26 +4,10 @@ name: 'test: links'
 description: 'Composite action to validate links'
 
 inputs:
-  DOC_DIR:
-    description: 'default directory path from project root'
-    required: false
-    default: .
-  BRANCH:
-    description: 'default branch'
-    required: false
-    default: main
-  FILE_EXTENSION:
-    description: 'extension to check'
-    required: false
-    default: .md
   CONFIG_FILE:
     description: 'default config file.'
     required: false
-    default: .github-actions/docs-link-check/config/link-check.json
-  MODIFIED_FILES_ONLY:
-    description: 'check modified files only'
-    required: false
-    default: yes
+    default: .github-actions/docs-link-check/config/.linkspector.yml
 
 runs:
   using: "composite"
@@ -38,12 +22,6 @@ runs:
     # use-quiet-mode: only show errors in output
     # use-verbose-mode: show detailed HTTP status for checked links
     - name: Test links
-      uses: gaurav-nelson/github-action-markdown-link-check@5c5dfc0ac2e225883c0e5f03a85311ec2830d368
+      uses: umbrelladocs/action-linkspector@v1
       with:
-        use-quiet-mode: yes
-        use-verbose-mode: yes
-        check-modified-files-only: ${{ inputs.MODIFIED_FILES_ONLY }}
-        config-file: ${{ inputs.CONFIG_FILE }}
-        base-branch: ${{ inputs.BRANCH }}
-        folder-path: ${{ inputs.DOC_DIR }}
-        file-extension: ${{ inputs.FILE_EXTENSION }}
+        config_file: ${{ inputs.CONFIG_FILE }}
