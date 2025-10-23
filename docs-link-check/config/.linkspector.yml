@@ -1,3 +1,12 @@
+dirs:
+  - ./docs            # or "." if you want the whole repo
+excludedDirs:
+  - ./build
+  - ./.vercel
+  - ./.docusaurus
+  - ./node_modules
+useGitIgnore: true
+
 ignorePatterns:
 - pattern: "^http(s)?://localhost"
 - pattern: "^http(s)?://127.0.0.1"
