@@ -61,6 +61,7 @@ Etherscan
 Etherspot
 Figma
 Filecoin
+Fireblocks
 Ganache
 [gG]asless
 Geth
@@ -179,6 +180,7 @@ Rinkeby
 Roboto
 Ropsten
 RPCs
+[Rr]unbook[s]?
 [sS]andbox(?:ing|ed)?
 [sS]ample[s]?
 Scamfari
@@ -193,6 +195,7 @@ Sentio
 [sS]essionToken
 Schnorr
 Slack
+SLA[s]?
 Socket.IO
 SphereX
 Splunk
