@@ -8,6 +8,10 @@ inputs:
     description: 'default config file.'
     required: false
     default: .github-actions/docs-link-check/config/.linkspector.yml
+  FAIL_LEVEL:
+    description: 'the level at which to fail the build'
+    required: false
+    default: 'any'
 
 runs:
   using: "composite"
@@ -18,10 +22,8 @@ runs:
         repository: Consensys/github-actions
         path: .github-actions
 
-    # umbrelladocs/action-linkspector@v1
-    # use-quiet-mode: only show errors in output
-    # use-verbose-mode: show detailed HTTP status for checked links
     - name: Test links
       uses: umbrelladocs/action-linkspector@652f85bc57bb1e7d4327260decc10aa68f7694c3
       with:
         config_file: ${{ inputs.CONFIG_FILE }}
+        fail_level: ${{ inputs.FAIL_LEVEL }}
