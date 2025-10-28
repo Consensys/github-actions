@@ -30,7 +30,7 @@ runs:
     # For MM you need to submit the hash for trivy-action and the VERSION (not hash) of setup-trivy. `setup-trivy` is slurped 
     # in via trivy-action and a hash won't work (maybe this is a bug with GH?) 
     - name: Run Trivy vulnerability scanner
-      uses: aquasecurity/trivy-action@v0.33.1
+      uses: aquasecurity/trivy-action@b6643a29fecd7f34b3597bc6acb0a98b03d33ff8
       with:
         scan-type: 'fs'
         ignore-unfixed: true
