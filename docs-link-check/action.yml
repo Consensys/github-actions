@@ -9,10 +9,13 @@ inputs:
     required: false
     default: .github-actions/docs-link-check/config/.linkspector.yml
   FAIL_LEVEL:
-    description: 'the level at which to fail the build'
+    description: 'exit code for reviewdog when errors are found with severity greater than or equal to this level'
     required: false
     default: 'any'
-
+  FILTER_MODE:
+    description: 'filtering mode for reviewdog command'
+    required: false
+    default: 'nofilter'
 runs:
   using: "composite"
   steps:
@@ -27,3 +30,4 @@ runs:
       with:
         config_file: ${{ inputs.CONFIG_FILE }}
         fail_level: ${{ inputs.FAIL_LEVEL }}
+        filter_mode: ${{ inputs.FILTER_MODE }}
