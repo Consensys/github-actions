@@ -8,14 +8,6 @@ inputs:
     description: 'default config file.'
     required: false
     default: .github-actions/docs-link-check/config/.linkspector.yml
-  FAIL_LEVEL:
-    description: 'exit code for reviewdog when errors are found with severity greater than or equal to this level'
-    required: false
-    default: 'any'
-  FILTER_MODE:
-    description: 'filtering mode for reviewdog command'
-    required: false
-    default: 'nofilter'
 runs:
   using: "composite"
   steps:
@@ -25,11 +17,34 @@ runs:
         repository: Consensys/github-actions
         path: .github-actions
 
-    # also needs reviewdog/action-setup@v1
-    # reviewdog/action-setup@d8edfce3dd5e1ec6978745e801f9c50b5ef80252
-    - name: Test links
-      uses: umbrelladocs/action-linkspector@652f85bc57bb1e7d4327260decc10aa68f7694c3
+    - name: Use Node.js 
+      uses: actions/setup-node@v4
       with:
-        config_file: ${{ inputs.CONFIG_FILE }}
-        fail_level: ${{ inputs.FAIL_LEVEL }}
-        filter_mode: ${{ inputs.FILTER_MODE }}
+        node-version: 20
+
+    # Fix Chrome sandbox issues on Ubuntu 24.04
+    - name: Setup Chrome Linux Sandbox
+      shell: bash    
+      run: |
+        # Based on https://chromium.googlesource.com/chromium/src/+/main/docs/security/apparmor-userns-restrictions.md
+        if [ "$(lsb_release -rs)" = "24.04" ]; then
+          echo 0 | sudo tee /proc/sys/kernel/apparmor_restrict_unprivileged_userns
+          echo 'Done'
+        else
+          echo "Not running on Ubuntu 24.04 — skipping sandbox fix"
+        fi
+
+    - name: Install linkspector
+      shell: bash
+      run: |
+        npm install -g @umbrelladocs/linkspector@0.4.7
+    
+    # Run linkspector and fail if there are broken links
+    - name: Run linkspector
+      shell: bash    
+      run: |
+        set -eo pipefail
+        linkspector --version
+        echo "🔍 Checking for broken links..."
+        linkspector check -c ${{ inputs.CONFIG_FILE }}
+        
