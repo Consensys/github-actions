@@ -1,6 +1,8 @@
 0x[0-9a-fA-F]{40}
 ^0x0$
 Algolia
+^AMM$
+^AMMs$
 Ansible
 [aA]utogenerat(?:ing|ed)?
 [aA]ttester[s]?
@@ -10,6 +12,8 @@ Arithmatex
 AWS Key Management Service
 AWS Secrets Manager
 Axelar
+^([Bb]ackrunner|BACKRUNNER)$
+^([Bb]ackrunners|BACKRUNNERS)$
 Azure Key Vault
 BerkeleyDB
 Bintray
@@ -36,12 +40,15 @@ CSpell
 [dD]app[s]?
 deadlineHeight
 [dD]eauthoriz(?:e|ing)
+^DeFi$
 [dD]eeplink(?:s|ing)?
 [dD]enylist[s]?
 [dD]eserializ(?:e|ing)
 [dD]eserialization
 [dD]esynchronization
 [dD]ev
+^DEX$
+^DEXs$
 DipDup
 Divio
 Doc[tT]ools
@@ -58,11 +65,15 @@ ESLint
 [eE]thdo
 EthSigner
 Ethereum
-Etherscan
+^[Ee]therscan$
 Etherspot
+^eth_sendbundle$
 Figma
 Filecoin
 Fireblocks
+^Flashbots$
+^([Ff]rontrunner|FRONTRUNNER)$
+^([Ff]rontrunners|FRONTRUNNERS)$
 Ganache
 [gG]asless
 ^gasPrice$
@@ -146,6 +157,8 @@ Octoflow
 opBNB|opbnb
 OpenSea
 [oO]rderbook[s]?
+[oO]rderflow
+[oO]rderflows
 Orion
 PADO
 [pP]arallelization
@@ -177,12 +190,14 @@ Redis
 Redocusaurus
 [rR]eentrancy
 [rR]elayer
+[rR]elayers
 [rR]epurposing
 [rR]estak(?:e|es|ing|ed)?
 Rinkeby
 Roboto
 Ropsten
 RPCs
+^Rabby$
 [Rr]unbook[s]?
 [sS]andbox(?:ing|ed)?
 [sS]ample[s]?
@@ -228,6 +243,7 @@ UAs
 [uU]nichain
 [uU]nmarshal(?:ing|ed)?
 [uU]pstream[s]?
+^URL$
 USB Armory Mk II
 [uU]serOp
 [vV]aultName
