@@ -1,8 +1,7 @@
 0x[0-9a-fA-F]{40}
 ^0x0$
 Algolia
-^AMM$
-^AMMs$
+^AMMs?$
 Ansible
 [aA]utogenerat(?:ing|ed)?
 [aA]ttester[s]?
@@ -12,8 +11,8 @@ Arithmatex
 AWS Key Management Service
 AWS Secrets Manager
 Axelar
-^([Bb]ackrunner|BACKRUNNER)$
-^([Bb]ackrunners|BACKRUNNERS)$
+^[Bb]ackrunners?$
+^[Bb]ackruns?$
 Azure Key Vault
 BerkeleyDB
 Bintray
@@ -47,8 +46,7 @@ deadlineHeight
 [dD]eserialization
 [dD]esynchronization
 [dD]ev
-^DEX$
-^DEXs$
+^DEXs?$
 DipDup
 Divio
 Doc[tT]ools
@@ -72,8 +70,8 @@ Figma
 Filecoin
 Fireblocks
 ^Flashbots$
-^([Ff]rontrunner|FRONTRUNNER)$
-^([Ff]rontrunners|FRONTRUNNERS)$
+^[Ff]rontrunners?$
+^[Ff]rontruns?$
 Ganache
 [gG]asless
 ^gasPrice$
@@ -157,8 +155,7 @@ Octoflow
 opBNB|opbnb
 OpenSea
 [oO]rderbook[s]?
-[oO]rderflow
-[oO]rderflows
+^[oO]rderflows?$
 Orion
 PADO
 [pP]arallelization
