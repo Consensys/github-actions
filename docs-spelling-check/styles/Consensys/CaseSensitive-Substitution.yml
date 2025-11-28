@@ -26,5 +26,10 @@ swap:
   'ZK-EVM': '"zkEVM"'
   'zk-EVM': '"zkEVM"'
   'zk EVM': '"zkEVM"'
+  # MetaMask Embedded Wallets - enforce proper capitalization
+  'metamask embedded wallets': '"MetaMask Embedded Wallets"'
+  'MetaMask embedded wallets': '"MetaMask Embedded Wallets"'
+  'MetaMask Embedded wallets': '"MetaMask Embedded Wallets"'
+  'metamask Embedded Wallets': '"MetaMask Embedded Wallets"'
 
 
