@@ -5,9 +5,9 @@ description: 'Composite action to test spelling'
 
 inputs:
   FILEPATHS:
-    description: 'Filepaths to look at, specified as a comma separated string ie "docs,blog,etc"'
+    description: 'Filepaths to look at, specified as a comma separated string with glob patterns ie "docs/**/*.md,blog/**/*.mdx,etc"'
     required: false
-    default: 'docs'  
+    default: 'docs/**/*.md,docs/**/*.mdx'  
 
 runs:
   using: "composite"
@@ -18,19 +18,24 @@ runs:
         repository: Consensys/github-actions
         path: .github-actions
 
+    # 2f7c5bfce28377bc069a65ba478de0a74aa0ca32 = v46.0.1 as at 18032025
+    - uses: tj-actions/changed-files@2f7c5bfce28377bc069a65ba478de0a74aa0ca32
+      id: changed-files
+      with:
+        files: ${{ inputs.FILEPATHS }}
+        separator: ','
+        output_separator: '\n'
+
     - uses: actions/setup-python@v6
       with:
         python-version: '3.12'
 
     # 38bf078c328061f59879b347ca344a718a736018 = v2 as at 24092024
     - name: Vale
+      if: ${{ steps.changed-files.outputs.all_changed_files != '' }}
       uses: errata-ai/vale-action@38bf078c328061f59879b347ca344a718a736018
       with:
-        files: ${{ inputs.FILEPATHS }}
-        separator: ","
-        vale_flags: "--config .github-actions/docs-spelling-check/.vale.ini --glob={*.md,*.mdx}"
+        files: ${{ steps.changed-files.outputs.all_changed_files }}
+        vale_flags: "--config .github-actions/docs-spelling-check/.vale.ini"
         # fail_on_error: true
         reporter: github-pr-check
-
-
-     
