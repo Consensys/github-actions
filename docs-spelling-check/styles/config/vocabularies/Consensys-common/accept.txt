@@ -16,6 +16,8 @@ Axelar
 Azure Key Vault
 BerkeleyDB
 Bintray
+[bB]iometrics
+[bB]ivariate
 [bB]undler[s]?
 Cakeshop
 [cC]alldata
@@ -64,6 +66,7 @@ ESLint
 EthSigner
 Ethereum
 ^[Ee]therscan$
+[eE]thers
 Etherspot
 ^eth_sendbundle$
 Figma
@@ -247,6 +250,8 @@ USB Armory Mk II
 Vercel
 Vertx
 vCPU[s]?
+[vV]ue
+[wW]agmi
 [wW]eb3
 Web3Signer
 [wW]ithdrawable

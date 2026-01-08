@@ -1,0 +1,29 @@
+# Cursor Rules for docs-spelling-check
+
+## File Access Restrictions
+
+**IMPORTANT**: Only modify files within these directories:
+- `styles/config/` (and all subdirectories)
+- `styles/Consensys/` (and all subdirectories)
+
+**DO NOT** modify, edit, or create files in:
+- `styles/Microsoft/` (external package - changes will be lost on sync)
+- `styles/proselint/` (external package - changes will be lost on sync)
+- `styles/write-good/` (external package - changes will be lost on sync)
+- Any other directories outside of `styles/config/` and `styles/Consensys/`
+
+## Workflow Guidelines
+
+1. **Read-only access** to external packages: You may read files in `styles/Microsoft/`, `styles/proselint/`, and `styles/write-good/` for reference, but never modify them.
+
+2. **Allowed modifications**:
+   - Files in `styles/config/` (including `ignore.yml`, vocabulary files, etc.)
+   - Files in `styles/Consensys/` (all YAML style files)
+
+3. **Before making changes**: Always verify the file path is within the allowed directories.
+
+4. **If asked to modify restricted files**: Politely decline and explain that those are external packages that will be overwritten on sync.
+
+## Context
+
+This repository uses Vale for linting. The `styles/config/` directory contains project-specific configuration and vocabulary files. The `styles/Consensys/` directory contains custom style rules. The other style directories (`Microsoft/`, `proselint/`, `write-good/`) are external packages that are synced and should not be modified.

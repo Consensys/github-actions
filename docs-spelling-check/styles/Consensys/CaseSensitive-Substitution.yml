@@ -20,16 +20,33 @@ swap:
   'On-chain': 'Onchain'
   'on chain': 'onchain'
   'On chain': 'Onchain'
+  # tested but this apparently failed to be handled with [Oo]ffchain in accept
+  'off-chain': 'offchain'
+  'Off-chain': 'Offchain'
+  'off chain': 'offchain'
+  'Off chain': 'Offchain'
   # this may be handled just by putting zkEVM into accept {need to test}
   'ZK EVM': '"zkEVM"'
   'ZKEVM': '"zkEVM"'
   'ZK-EVM': '"zkEVM"'
   'zk-EVM': '"zkEVM"'
   'zk EVM': '"zkEVM"'
-  # MetaMask Embedded Wallets - enforce proper capitalization
-  'metamask embedded wallets': '"MetaMask Embedded Wallets"'
-  'MetaMask embedded wallets': '"MetaMask Embedded Wallets"'
-  'MetaMask Embedded wallets': '"MetaMask Embedded Wallets"'
-  'metamask Embedded Wallets': '"MetaMask Embedded Wallets"'
+  # MetaMask - enforce proper capitalization
+  "metamask": "MetaMask"
+  "Metamask": "MetaMask"
+  # Embedded Wallets - enforce proper capitalization
+  "embedded wallets": "Embedded Wallets"
+  "embedded Wallets": "Embedded Wallets"
+  "Embedded wallets": "Embedded Wallets"
+  # Mastercard - enforce proper capitalization
+  'mastercard': '"Mastercard"'
+  # WalletConnect - enforce proper capitalization
+  'walletconnect': '"WalletConnect"'
+  'Walletconnect': '"WalletConnect"'
+  # Shamir's - enforce proper capitalization
+  shamir: "Shamir's"
+  "shamir's": "Shamir's"
+  # Polkadot - enforce proper capitalization
+  "polkadot": "Polkadot"
 
 
