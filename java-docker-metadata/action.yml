@@ -37,7 +37,7 @@ runs:
             TAGS="${{ inputs.docker-repo }}:${{ inputs.publish-version }}"
             TAGS="$TAGS,${{ inputs.docker-repo }}:latest"
           fi
-          # echo "tags=$TAGS" >> $GITHUB_OUTPUT
+          echo "tags=$TAGS" >> $GITHUB_OUTPUT
           
           # Determine Push Flag
           if [ "${{ github.ref }}" == "refs/heads/main" ]; then
