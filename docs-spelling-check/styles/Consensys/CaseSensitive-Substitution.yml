@@ -38,6 +38,24 @@ swap:
   "embedded wallets": "Embedded Wallets"
   "embedded Wallets": "Embedded Wallets"
   "Embedded wallets": "Embedded Wallets"
+  # Wallet Services - enforce proper capitalization
+  "wallet services": "Wallet Services"
+  "wallet Services": "Wallet Services"
+  "Wallet services": "Wallet Services"
+  # MetaMask Smart Accounts - enforce proper capitalization
+  "metamask smart accounts": "MetaMask Smart Accounts"
+  "Metamask Smart Accounts": "MetaMask Smart Accounts"
+  "MetaMask smart accounts": "MetaMask Smart Accounts"
+  # Auth Connection ID - enforce proper capitalization
+  "auth connection id": "Auth Connection ID"
+  "Auth connection ID": "Auth Connection ID"
+  "Auth Connection Id": "Auth Connection ID"
+  # Google - enforce proper capitalization
+  "google": "Google"
+  # Facebook - enforce proper capitalization
+  "facebook": "Facebook"
+  # Twitter - enforce proper capitalization
+  "twitter": "Twitter"
   # Mastercard - enforce proper capitalization
   'mastercard': '"Mastercard"'
   # WalletConnect - enforce proper capitalization
