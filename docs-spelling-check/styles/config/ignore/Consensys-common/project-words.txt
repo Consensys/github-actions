@@ -954,7 +954,6 @@ plushies
 pnpm
 poap
 podfile
-polkadot
 pollable
 polyfill
 polyfills
@@ -1105,7 +1104,6 @@ rpcprefix
 rtcts
 rtlcss
 runtimes
-s
 safeheron
 samina
 samzkback
@@ -1143,7 +1141,7 @@ sess
 setaf
 setext
 sgaua
-shamir
+Shamir's
 shannessy
 sharded
 shasum
@@ -1184,6 +1182,7 @@ socialscan
 socure
 solana
 solana's
+@solana/web3.js
 somer
 soulbound
 sourcify
