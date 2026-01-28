@@ -155,15 +155,18 @@ PADO
 [pP]arallelization
 paramStructure
 [pP]articipate
+[pP]asswordless
 Pegasys
 [pP]ermission(?:ing|ed)?
 [pP]repend(?:s|ing|ed)?
 [Pp]recompile[s]?
 Photoshop
+Polkadot
 Postgres
 Powershell
 PoW
 P-Chain
+[pP]olyfill(?:s|ed|ing)?
 [pP]reidentif(?:y|ied)
 Proof of Humanity|PoH|POH
 Prometheus
