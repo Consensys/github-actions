@@ -1,4 +1,5 @@
 0x[0-9a-fA-F]{40}
+^AMMs?$
 Algolia
 Ansible
 [aA]utogenerat(?:ing|ed)?
@@ -36,11 +37,13 @@ CSpell
 deadlineHeight
 [dD]eauthoriz(?:e|ing)
 [dD]eeplink(?:s|ing)?
+^DeFi$
 [dD]enylist[s]?
 [dD]eserializ(?:e|ing)
 [dD]eserialization
 [dD]esynchronization
 [dD]ev
+^DEXs?$
 DipDup
 Divio
 Doc[tT]ools
@@ -57,13 +60,16 @@ ESLint
 [eE]thdo
 EthSigner
 Ethereum
-Etherscan
+^[Ee]therscan$
 Etherspot
+^eth_sendbundle$
 Figma
 Filecoin
 Fireblocks
+^Flashbots$
 Ganache
 [gG]asless
+^gasPrice$
 Geth
 Gitcoin
 GitHub
@@ -143,6 +149,7 @@ Octoflow
 opBNB|opbnb
 OpenSea
 [oO]rderbook[s]?
+^[oO]rderflows?$
 Orion
 PADO
 [pP]arallelization
@@ -165,6 +172,7 @@ Prysm|PRYSM
 Prysmatic
 Pyrmont
 Pyth
+^Rabby$
 Raft
 ReadTheDocs
 [rR]ebas(?:e|es|ing|ed)?
@@ -173,7 +181,7 @@ Redis
 [rR]edistributable[s]?
 Redocusaurus
 [rR]eentrancy
-[rR]elayer
+[rR]elayer[s]?
 [rR]epurposing
 [rR]estak(?:e|es|ing|ed)?
 Rinkeby
@@ -231,6 +239,8 @@ USB Armory Mk II
 Vercel
 Vertx
 vCPU[s]?
+[vV]ue
+[wW]agmi
 [wW]eb3
 Web3Signer
 [wW]ithdrawable
