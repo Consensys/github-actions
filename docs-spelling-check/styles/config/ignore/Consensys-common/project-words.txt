@@ -98,8 +98,6 @@ azuredeploy
 azurerm
 backoff
 backport
-backrunning
-backruns
 backticks
 bartosz
 battlemon
@@ -395,6 +393,7 @@ ethclient
 ethdo
 etherbase
 ethereumj
+ethers
 etherspot
 ethersproject
 ethersv
@@ -464,8 +463,6 @@ froms
 fromscratchistanbul
 frontends
 frontpage
-frontrunning
-frontruns
 fsutil
 funboxteam
 fvy
@@ -957,7 +954,6 @@ plushies
 pnpm
 poap
 podfile
-Polkadot
 pollable
 polyfill
 polyfills
@@ -1108,7 +1104,6 @@ rpcprefix
 rtcts
 rtlcss
 runtimes
-s
 safeheron
 samina
 samzkback
@@ -1408,6 +1403,7 @@ vitidiary
 vjeux
 vwap
 vyper
+wagmi
 wagmi's
 waitlist
 waivable
