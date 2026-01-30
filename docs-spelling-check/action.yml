@@ -3,12 +3,6 @@
 name: 'test: spelling'
 description: 'Composite action to test spelling'
 
-inputs:
-  FILEPATHS:
-    description: 'Filepaths to look at, specified as a comma separated string with glob patterns ie "docs/**/*.md,blog/**/*.mdx,etc"'
-    required: false
-    default: 'docs/**/*.md,docs/**/*.mdx'  
-
 runs:
   using: "composite"
   steps:
@@ -22,9 +16,7 @@ runs:
     - uses: tj-actions/changed-files@2f7c5bfce28377bc069a65ba478de0a74aa0ca32
       id: changed-files
       with:
-        files: ${{ inputs.FILEPATHS }}
-        separator: ','
-        output_separator: '\n'
+        files_separator: ","
 
     - uses: actions/setup-python@v6
       with:
@@ -36,6 +28,7 @@ runs:
       uses: errata-ai/vale-action@38bf078c328061f59879b347ca344a718a736018
       with:
         files: ${{ steps.changed-files.outputs.all_changed_files }}
+        separator: ","
         vale_flags: "--config .github-actions/docs-spelling-check/.vale.ini"
         # fail_on_error: true
         reporter: github-pr-check
