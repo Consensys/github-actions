@@ -19,7 +19,7 @@ runs:
         files: |
           **/*.md
           **/*.mdx
-        files_separator: ","
+        files_separator: "\n"
 
     - uses: actions/setup-python@v6
       with:
@@ -31,7 +31,7 @@ runs:
       uses: errata-ai/vale-action@38bf078c328061f59879b347ca344a718a736018
       with:
         files: ${{ steps.changed-files.outputs.all_changed_files }}
-        separator: ","
+        separator: "\n"
         vale_flags: "--config .github-actions/docs-spelling-check/.vale.ini"
         # fail_on_error: true
         reporter: github-pr-check
