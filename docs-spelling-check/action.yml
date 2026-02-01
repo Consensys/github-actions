@@ -3,9 +3,19 @@
 name: 'test: spelling'
 description: 'Composite action to test spelling'
 
+inputs:
+  FILEPATHS:
+    description: 'Filepaths to look at, specified as a comma separated string ie "docs/**/*.md,blog/**/*.md,etc"'
+    required: false
+    default: |
+      **/*.md
+      **/*.mdx
+
+
 runs:
   using: "composite"
   steps:
+    # Also set `fetch-depth: 0` on the source repo so the action can compare the current head against the base branch.
     - name: Checkout tools repo
       uses: actions/checkout@v5
       with:
@@ -16,9 +26,8 @@ runs:
     - uses: tj-actions/changed-files@2f7c5bfce28377bc069a65ba478de0a74aa0ca32
       id: changed-files
       with:
-        files: |
-          **/*.md
-          **/*.mdx
+        files: ${{ inputs.FILEPATHS }}
+        # input files separator
         files_separator: "\n"
 
     - uses: actions/setup-python@v6
@@ -27,7 +36,7 @@ runs:
 
     # 38bf078c328061f59879b347ca344a718a736018 = v2 as at 24092024
     - name: Vale
-      if: ${{ steps.changed-files.outputs.all_changed_files != '' }}
+      if: steps.changed-files.outputs.any_changed == 'true'
       uses: errata-ai/vale-action@38bf078c328061f59879b347ca344a718a736018
       with:
         files: ${{ steps.changed-files.outputs.all_changed_files }}

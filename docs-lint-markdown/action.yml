@@ -16,6 +16,7 @@ inputs:
 runs:
   using: "composite"
   steps:
+    # Also set `fetch-depth: 0` on the source repo so the action can compare the current head against the base branch.
     - name: Checkout tools repo
       uses: actions/checkout@v5
       with:
@@ -26,11 +27,12 @@ runs:
     - uses: tj-actions/changed-files@2f7c5bfce28377bc069a65ba478de0a74aa0ca32
       id: changed-files
       with:
-        files:  ${{ inputs.FILEPATHS }}
+        files: ${{ inputs.FILEPATHS }}
+        # output strings separator
         separator: ','
 
     - name: markdown lint
-      if: ${{ steps.changed-files.outputs.all_changed_files != '' }}
+      if: steps.changed-files.outputs.any_changed == 'true'
       uses: DavidAnson/markdownlint-cli2-action@v17
       with:
         config: ${{ inputs.CONFIG_FILE }}
