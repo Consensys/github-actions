@@ -5,13 +5,17 @@ description: 'Composite action to test spelling'
 
 inputs:
   FILEPATHS:
-    description: 'Filepaths to look at, specified as a comma separated string with glob patterns ie "docs/**/*.md,blog/**/*.mdx,etc"'
+    description: 'Filepaths to look at, specified as a comma separated string ie "docs/**/*.md,blog/**/*.md,etc"'
     required: false
-    default: 'docs/**/*.md,docs/**/*.mdx'  
+    default: |
+      **/*.md
+      **/*.mdx
+
 
 runs:
   using: "composite"
   steps:
+    # Also set `fetch-depth: 0` on the source repo so the action can compare the current head against the base branch.
     - name: Checkout tools repo
       uses: actions/checkout@v5
       with:
@@ -23,8 +27,8 @@ runs:
       id: changed-files
       with:
         files: ${{ inputs.FILEPATHS }}
-        separator: ','
-        output_separator: '\n'
+        # input files separator
+        files_separator: "\n"
 
     - uses: actions/setup-python@v6
       with:
@@ -32,10 +36,11 @@ runs:
 
     # 38bf078c328061f59879b347ca344a718a736018 = v2 as at 24092024
     - name: Vale
-      if: ${{ steps.changed-files.outputs.all_changed_files != '' }}
+      if: steps.changed-files.outputs.any_changed == 'true'
       uses: errata-ai/vale-action@38bf078c328061f59879b347ca344a718a736018
       with:
         files: ${{ steps.changed-files.outputs.all_changed_files }}
+        separator: "\n"
         vale_flags: "--config .github-actions/docs-spelling-check/.vale.ini"
         # fail_on_error: true
         reporter: github-pr-check
