@@ -27,6 +27,8 @@ runs:
         files: ${{ inputs.FILEPATHS }}
         # input files separator
         files_separator: "\n"
+        # output files separator
+        separator: "\n"
 
     - uses: actions/setup-python@v6
       with:
