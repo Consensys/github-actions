@@ -1,2 +1,5 @@
 .DS_Store
 .idea
+docs-spelling-check/styles/Microsoft/
+docs-spelling-check/styles/proselint/
+docs-spelling-check/styles/write-good/

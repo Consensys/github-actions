@@ -1,0 +1,23 @@
+---
+name: Spell check
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  vale:
+    name: Vale
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - name: Run Vale
+        uses: ./docs-spelling-check
