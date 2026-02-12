@@ -90,11 +90,11 @@ Homebrew
 [hH]ostname[s]?
 HSM[s]?
 Hyperledger
-[iI]nviter(?:'s)?
 InfluxDB
 Infura
 [iI]nterlockUrl
 IntraLayer
+[iI]nviter(?:'s)?
 Irys
 Jasypt
 JMeter
