@@ -90,6 +90,7 @@ Homebrew
 [hH]ostname[s]?
 HSM[s]?
 Hyperledger
+[iI]nviter(?:'s)?
 InfluxDB
 Infura
 [iI]nterlockUrl
@@ -158,6 +159,7 @@ paramStructure
 [pP]asswordless
 Pegasys
 [pP]ermission(?:ing|ed)?
+[pP]imlico(?:'s)?
 [pP]repend(?:s|ing|ed)?
 [Pp]recompile[s]?
 Photoshop
@@ -242,6 +244,7 @@ USB Armory Mk II
 Vercel
 Vertx
 vCPU[s]?
+[vV]iem(?:'s)?
 [vV]ue
 [wW]agmi
 [wW]eb3
