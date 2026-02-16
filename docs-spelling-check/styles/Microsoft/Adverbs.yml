@@ -8,6 +8,7 @@ action:
 tokens:
   - abnormally
   - absentmindedly
+  - accidentally
   - adventurously
   - anxiously
   - arrogantly
@@ -75,6 +76,7 @@ tokens:
   - frenetically
   - frightfully
   - furiously
+  - generally
   - generously
   - gently
   - gladly
@@ -144,29 +146,35 @@ tokens:
   - optimistically
   - overconfidently
   - painfully
+  - partially
   - patiently
   - perfectly
   - playfully
   - politely
   - poorly
   - positively
+  - potentially
   - powerfully
   - promptly
+  - properly
   - punctually
   - quaintly
   - queasily
   - queerly
   - questionably
+  - quickly
   - quietly
   - quirkily
   - quite
   - quizzically
+  - randomly
   - rapidly
   - rarely
   - readily
   - really
   - reassuringly
   - recklessly
+  - regularly
   - reluctantly
   - repeatedly
   - reproachfully
@@ -176,21 +184,24 @@ tokens:
   - rigidly
   - roughly
   - rudely
+  - safely
   - scarcely
   - scarily
   - searchingly
   - sedately
   - seemingly
   - selfishly
+  - separately
   - seriously
   - shakily
   - sharply
   - sheepishly
   - shrilly
   - shyly
-  - simply
+  - silently
   - sleepily
   - slowly
+  - smoothly
   - softly
   - solemnly
   - solidly

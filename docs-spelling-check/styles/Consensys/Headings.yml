@@ -42,6 +42,7 @@ exceptions:
   - Ethers.js
   - EthSigner
   - EVM
+  - Embedded Wallets
   - FAQs
   - Flask
   - Go
