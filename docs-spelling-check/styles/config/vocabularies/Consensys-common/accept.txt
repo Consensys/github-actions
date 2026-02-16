@@ -249,6 +249,7 @@ vCPU[s]?
 [wW]agmi
 [wW]eb3
 Web3Signer
+[wW]hitelabel(?:ling|ing)?
 [wW]ithdrawable
 X-Chain
 [yY]aml|YAML
