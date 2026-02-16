@@ -49,7 +49,6 @@ runs:
       uses: errata-ai/vale-action@38bf078c328061f59879b347ca344a718a736018
       with:
         files: ${{ steps.changed-files.outputs.all_changed_files }}
-        vale_flags: "--config .github-actions/docs-spelling-check/.vale.ini"
+        vale_flags: "--config .github-actions/docs-spelling-check/.vale.ini --quiet"
         # fail_on_error: true
         reporter: github-check
-        filter_mode: diff_context
