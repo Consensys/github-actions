@@ -94,6 +94,7 @@ InfluxDB
 Infura
 [iI]nterlockUrl
 IntraLayer
+[iI]nviter(?:'s)?
 Irys
 Jasypt
 JMeter
@@ -161,6 +162,7 @@ Pegasys
 [pP]repend(?:s|ing|ed)?
 [Pp]recompile[s]?
 Photoshop
+[pP]imlico(?:'s)?
 Polkadot
 Postgres
 Powershell
@@ -242,6 +244,7 @@ USB Armory Mk II
 Vercel
 Vertx
 vCPU[s]?
+[vV]iem(?:'s)?
 [vV]ue
 [wW]agmi
 [wW]eb3
