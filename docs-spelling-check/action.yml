@@ -26,10 +26,19 @@ runs:
     - uses: tj-actions/changed-files@2f7c5bfce28377bc069a65ba478de0a74aa0ca32
       id: changed-files
       with:
+        path: "."  # look in the main repo root
         files: ${{ inputs.FILEPATHS }}
-        # input files separator
-        files_separator: "\n"
+ 
+    - name: List Changed Files
+      if: steps.changed-files.outputs.any_changed == 'true'
+      shell: bash
+      run: |
+        echo "The following files were detected for spellcheck:"
+        for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+          echo "  - $file"
+        done
 
+    # need this for vale
     - uses: actions/setup-python@v6
       with:
         python-version: '3.12'
@@ -40,7 +49,6 @@ runs:
       uses: errata-ai/vale-action@38bf078c328061f59879b347ca344a718a736018
       with:
         files: ${{ steps.changed-files.outputs.all_changed_files }}
-        separator: "\n"
         vale_flags: "--config .github-actions/docs-spelling-check/.vale.ini"
         # fail_on_error: true
         reporter: github-pr-check
