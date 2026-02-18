@@ -18,7 +18,7 @@ runs:
   using: "composite"
   steps:
     - name: Checkout tools repo
-      uses: actions/checkout@v5
+      uses: actions/checkout@v6
       with:
         repository: Consensys/github-actions
         path: .github-actions
@@ -30,7 +30,7 @@ runs:
     # For MM you need to submit the hash for trivy-action and the VERSION (not hash) of setup-trivy. `setup-trivy` is slurped 
     # in via trivy-action and a hash won't work (maybe this is a bug with GH?) 
     - name: Run Trivy vulnerability scanner
-      uses: aquasecurity/trivy-action@b6643a29fecd7f34b3597bc6acb0a98b03d33ff8
+      uses: aquasecurity/trivy-action@0.34.0
       with:
         scan-type: 'fs'
         ignore-unfixed: true

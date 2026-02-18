@@ -18,13 +18,13 @@ runs:
   steps:
     # Also set `fetch-depth: 0` on the source repo so the action can compare the current head against the base branch.
     - name: Checkout tools repo
-      uses: actions/checkout@v5
+      uses: actions/checkout@v6
       with:
         repository: Consensys/github-actions
         path: .github-actions
 
-    # 2f7c5bfce28377bc069a65ba478de0a74aa0ca32 = v46.0.1 as at 18032025
-    - uses: tj-actions/changed-files@2f7c5bfce28377bc069a65ba478de0a74aa0ca32
+    # 2f7c5bfce28377bc069a65ba478de0a74aa0ca32 = v47.0.4
+    - uses: tj-actions/changed-files@7dee1b0c1557f278e5c7dc244927139d78c0e22a
       id: changed-files
       with:
         files: ${{ inputs.FILEPATHS }}

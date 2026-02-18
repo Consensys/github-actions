@@ -58,7 +58,7 @@ runs:
           return runs.data.workflow_runs[0].id  
 
     - name: download the artifact
-      uses: actions/download-artifact@v5
+      uses: actions/download-artifact@v7
       with:
         github-token: ${{ steps.generate_github_token.outputs.token }}
         repository: '${{ inputs.org }}/${{ inputs.repository }}'

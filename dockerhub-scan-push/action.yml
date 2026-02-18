@@ -17,7 +17,7 @@ runs:
   using: "composite"
   steps:
     - name: Checkout tools repo
-      uses: actions/checkout@v5
+      uses: actions/checkout@v6
       with:
         repository: Consensys/github-actions
         path: .github-actions
@@ -48,7 +48,7 @@ runs:
         tags: ${{ inputs.DOCKER_REPO }}:latest
 
     - name: Run Trivy vulnerability scanner
-      uses: aquasecurity/trivy-action@0.33.0
+      uses: aquasecurity/trivy-action@0.34.0
       with:
         image-ref: ${{ inputs.DOCKER_REPO }}:latest
         format: 'sarif'

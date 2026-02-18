@@ -40,10 +40,10 @@ runs:
           echo "tags=$TAGS" >> $GITHUB_OUTPUT
           
           # Determine Push Flag
-          if [ "${{ github.ref }}" == "refs/heads/main" ]; then
-            if [ "${{ github.event_name }}" != "pull_request" ] && [ "${{ github.event_name }}" != "schedule" ] ; then
-              echo "push=false" >> $GITHUB_OUTPUT
-            fi
+          if [[ "${{ github.ref }}" == "refs/heads/main" || "${{ github.ref }}" == refs/tags/* ]] && \
+            [ "${{ github.event_name }}" != "pull_request" ] && \
+            [ "${{ github.event_name }}" != "schedule" ]; then
+            echo "push=true" >> $GITHUB_OUTPUT
           else
             echo "push=false" >> $GITHUB_OUTPUT
           fi

@@ -17,38 +17,38 @@ runs:
   steps:
     # Also set `fetch-depth: 0` on the source repo so the action can compare the current head against the base branch.
     - name: Checkout tools repo
-      uses: actions/checkout@v5
+      uses: actions/checkout@v6
       with:
         repository: Consensys/github-actions
         path: .github-actions
 
-    # 2f7c5bfce28377bc069a65ba478de0a74aa0ca32 = v46.0.1 as at 18032025
-    - uses: tj-actions/changed-files@2f7c5bfce28377bc069a65ba478de0a74aa0ca32
+    # 7dee1b0c1557f278e5c7dc244927139d78c0e22a = v47.0.4
+    - uses: tj-actions/changed-files@7dee1b0c1557f278e5c7dc244927139d78c0e22a
       id: changed-files
       with:
         path: "."  # look in the main repo root
         files: ${{ inputs.FILEPATHS }}
+        separator: ","
  
     - name: List Changed Files
       if: steps.changed-files.outputs.any_changed == 'true'
       shell: bash
       run: |
         echo "The following files were detected for spellcheck:"
-        for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
-          echo "  - $file"
-        done
+        echo "${{ steps.changed-files.outputs.all_changed_files }}"
 
     # need this for vale
     - uses: actions/setup-python@v6
       with:
         python-version: '3.12'
 
-    # 38bf078c328061f59879b347ca344a718a736018 = v2 as at 24092024
+    # d89dee975228ae261d22c15adcd03578634d429c = v2.1.1 
     - name: Vale
       if: steps.changed-files.outputs.any_changed == 'true'
-      uses: errata-ai/vale-action@38bf078c328061f59879b347ca344a718a736018
+      uses: errata-ai/vale-action@d89dee975228ae261d22c15adcd03578634d429c
       with:
         files: ${{ steps.changed-files.outputs.all_changed_files }}
         vale_flags: "--config .github-actions/docs-spelling-check/.vale.ini"
         # fail_on_error: true
         reporter: github-pr-check
+        separator: ","
