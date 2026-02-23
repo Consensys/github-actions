@@ -140,6 +140,7 @@ Mobula
 [mM]ultikey[s]?
 [mM]ultiple
 [mM]ultisig(?:s|nature)?
+[mM]ultivalidator[s]?(?:'s)?
 [nN]amespace[s]?
 [nN]avbar
 Nethermind
@@ -252,6 +253,7 @@ UAs
 USB Armory Mk II
 [uU]serOp
 [vV]aultName
+[vV]alidium[s]?(?:'s)?
 Vercel
 Vertx
 vCPU[s]?
