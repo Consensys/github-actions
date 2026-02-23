@@ -84,6 +84,7 @@ exceptions:
   - Orion
   - Palm
   - PegaSys
+  - PeerDAS
   - PostgreSQL
   - Pyth
   - React
@@ -102,6 +103,7 @@ exceptions:
   - Studio
   - Swagger
   - Tellor
+  - Tezos
   - TOML
   - REPL
   - TLS
