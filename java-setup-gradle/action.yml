@@ -27,7 +27,8 @@ runs:
         path: |
           ~/.gradle/caches
           ~/.gradle/wrapper
-        key: ${{ runner.os }}-gradle-${{ hashFiles('**/gradle/versions.gradle') }}-${{ github.sha }}
+        key: ${{ runner.os }}-gradle-${{ hashFiles('build.gradle') }}-${{ github.ref }}-${{ github.sha }}
         restore-keys: |
-          ${{ runner.os }}-gradle-${{ hashFiles('**/gradle/versions.gradle') }}
+          ${{ runner.os }}-gradle-${{ hashFiles('build.gradle') }}-${{ github.ref }}-
+          ${{ runner.os }}-gradle-${{ hashFiles('build.gradle') }}-
           ${{ runner.os }}-gradle-
