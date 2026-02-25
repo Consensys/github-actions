@@ -1,5 +1,6 @@
 extends: substitution
 message: Prefer '%s' over '%s'.
+ignorecase: true
 level: warning
 action:
   name: replace
