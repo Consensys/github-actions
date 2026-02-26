@@ -7,6 +7,7 @@ Ansible
 Arithmatex
 [aA]uthenticationMode
 [aA]uto-merge
+[aA]utodetect(?:s|ing|ed)?(?:'s)?
 AWS Key Management Service
 AWS Secrets Manager
 Axelar
@@ -42,6 +43,7 @@ deadlineHeight
 [dD]eserializ(?:e|ing)
 [dD]eserialization
 [dD]esynchronization
+[dD]efaultValue
 [dD]ev
 ^DEXs?$
 DipDup
@@ -54,6 +56,7 @@ Doc[tT]ools
 [eE]ndpointOverride
 [eE]node[s]?
 [Ee]phemery
+ENRs
 ERC-20
 Erigon
 ESLint
@@ -64,6 +67,7 @@ Ethereum
 Etherspot
 ^eth_sendbundle$
 Figma
+Fusaka
 Filecoin
 Fireblocks
 ^Flashbots$
@@ -83,6 +87,7 @@ Grafana
 gRPC
 [Gg]?wei
 Hashi[cC]orp
+[hH]ardfork[s]?(?:'s)?
 Helmfile
 Hexagate
 Homebrew
@@ -135,6 +140,7 @@ Mobula
 [mM]ultikey[s]?
 [mM]ultiple
 [mM]ultisig(?:s|nature)?
+[mM]ultivalidator[s]?(?:'s)?
 [nN]amespace[s]?
 [nN]avbar
 Nethermind
@@ -157,6 +163,7 @@ PADO
 paramStructure
 [pP]articipate
 [pP]asswordless
+Pectra
 Pegasys
 [pP]ermission(?:ing|ed)?
 [pP]repend(?:s|ing|ed)?
@@ -175,6 +182,7 @@ Prometheus
 [pP]rotobuf
 Prysm|PRYSM
 Prysmatic
+[pP]ubspec(?:'s)?
 Pyrmont
 Pyth
 ^Rabby$
@@ -189,6 +197,7 @@ Redocusaurus
 [rR]elayer[s]?
 [rR]epurposing
 [rR]estak(?:e|es|ing|ed)?
+[rR]esync(?:s|ing|ed)?(?:'s)?
 Rinkeby
 Roboto
 Ropsten
@@ -218,12 +227,15 @@ StarkGate
 StarkWare
 [sS]ubgraph[s]?
 [sS]uborganization[s]?
+solc
 Supra
+[sS]upernode[s]?(?:'s)?
 Swagger
 Swellchain
 Tasklist
 Teku
 Telegraf
+Tezos
 Tellor
 [tT]enantId
 [tT]estnet[s]?
@@ -241,6 +253,7 @@ UAs
 USB Armory Mk II
 [uU]serOp
 [vV]aultName
+[vV]alidium[s]?(?:'s)?
 Vercel
 Vertx
 vCPU[s]?
@@ -249,6 +262,7 @@ vCPU[s]?
 [wW]agmi
 [wW]eb3
 Web3Signer
+[wW]hitelabel(?:ling|ing)?
 [wW]ithdrawable
 X-Chain
 [yY]aml|YAML
