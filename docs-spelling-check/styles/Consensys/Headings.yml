@@ -67,6 +67,7 @@ exceptions:
   - L2
   - Linea
   - Linea Enterprise
+  - Linea Yield Boost
   - Linux
   - macOS
   - Marketplace
@@ -122,6 +123,7 @@ exceptions:
   - Wallet API
   - WebSockets
   - Windows
+  - Yield Boost
   - YAML
   - YML
   - 2FA
