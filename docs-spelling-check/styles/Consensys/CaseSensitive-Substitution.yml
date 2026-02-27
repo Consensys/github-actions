@@ -12,6 +12,8 @@ swap:
   # Linea Voyage
   'voyage': '"Voyage"'
   'besu': '"Besu"'
+  # Beacon (e.g. Ethereum Beacon Chain) - proper noun
+  'beacon': '"Beacon"'
   'Dapp': '"dapp"'
   'goerli': '"holesky", or sepolia'
   'Goerli': '"Holesky", or Sepolia'
