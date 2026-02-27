@@ -124,6 +124,7 @@ Linea Yield Boost
 Logback
 Logrus
 Logstash
+LPs
 [mM]ainnet[s]?
 Markdown
 Markdownlint
@@ -227,7 +228,7 @@ Splunk
 StarkGate
 [sS]tarknet
 StarkWare
-stVault
+stVaults?
 [sS]ubgraph[s]?
 [sS]uborganization[s]?
 solc
