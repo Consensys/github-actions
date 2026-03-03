@@ -125,6 +125,8 @@ Logback
 Logrus
 Logstash
 LPs
+LST
+LSTs
 [mM]ainnet[s]?
 Markdown
 Markdownlint
@@ -198,6 +200,7 @@ Redis
 Redocusaurus
 [rR]eentrancy
 [rR]elayer[s]?
+[rR]ollout[s]?(?:'s)?
 [rR]epurposing
 [rR]estak(?:e|es|ing|ed)?
 [rR]esync(?:s|ing|ed)?(?:'s)?
