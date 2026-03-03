@@ -120,9 +120,11 @@ Kovan
 libsodium
 Lineaplorer
 Linea Voyage
+Linea Yield Boost
 Logback
 Logrus
 Logstash
+LPs
 [mM]ainnet[s]?
 Markdown
 Markdownlint
@@ -189,6 +191,7 @@ Pyth
 Raft
 ReadTheDocs
 [rR]ebas(?:e|es|ing|ed)?
+[rR]ebalanc(?:e|es|ing|ed)?(?:'s)?
 [rR]edelegat(?:e|es|ing|ed|ion|ions)?
 Redis
 [rR]edistributable[s]?
@@ -225,6 +228,7 @@ Splunk
 StarkGate
 [sS]tarknet
 StarkWare
+stVaults?
 [sS]ubgraph[s]?
 [sS]uborganization[s]?
 solc
@@ -250,6 +254,7 @@ UAs
 [uU]nichain
 [uU]nmarshal(?:ing|ed)?
 [uU]pstream[s]?
+[uU]nstak(?:e|es|ing|ed)?(?:'s)?
 USB Armory Mk II
 [uU]serOp
 [vV]aultName
@@ -265,6 +270,7 @@ Web3Signer
 [wW]hitelabel(?:ling|ing)?
 [wW]ithdrawable
 X-Chain
+Yield Boost
 [yY]aml|YAML
 Zinken
 ZKsync Era
