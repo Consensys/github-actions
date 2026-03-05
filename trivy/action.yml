@@ -22,11 +22,12 @@ runs:
       with:
         repository: Consensys/github-actions
         path: .github-actions
-
+    
+    # 0.34.2
     # Refer to https://github.com/aquasecurity/trivy-action#updating-caches-in-the-default-branch for the env vars 
     # also uses aquasecurity/setup-trivy@v0.2.4
     - name: Run Trivy vulnerability scanner
-      uses: aquasecurity/trivy-action@0.34.2
+      uses: aquasecurity/trivy-action@97e0b3872f55f89b95b2f65b3dbab56962816478
       with:
         scan-type: 'fs'
         ignore-unfixed: true
