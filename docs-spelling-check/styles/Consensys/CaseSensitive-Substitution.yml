@@ -32,7 +32,6 @@ swap:
   'on chain': 'onchain'
   'on-chain': 'onchain'
   "polkadot": "Polkadot"
-  'prover': '"Prover"'
   shamir: "Shamir's"
   "shamir's": "Shamir's"
   'voyage': '"Voyage"'
