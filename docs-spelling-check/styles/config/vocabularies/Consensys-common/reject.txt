@@ -7,7 +7,6 @@ e[rR][cC][ -]20
 [eE]therum
 log[bB]ack|logBack
 log[sS]tash
-maru
 orion
 [pP]egaSys
 p[ -][cC]hain

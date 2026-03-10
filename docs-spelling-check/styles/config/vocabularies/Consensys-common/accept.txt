@@ -125,8 +125,7 @@ Logback
 Logrus
 Logstash
 LPs
-LST
-LSTs
+LSTs?
 [mM]ainnet[s]?
 Markdown
 Markdownlint
@@ -135,7 +134,6 @@ Medalla
 [Mm]empool
 Merkle
 Merkleroot
-Maru
 MetaMask
 MkDocs
 Mobula

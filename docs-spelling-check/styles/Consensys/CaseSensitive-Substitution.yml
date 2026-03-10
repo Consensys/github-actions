@@ -12,6 +12,8 @@ swap:
   # Linea Voyage
   'voyage': '"Voyage"'
   'besu': '"Besu"'
+  # Maru - proper noun
+  'maru': '"Maru"'
   'Dapp': '"dapp"'
   'goerli': '"holesky", or sepolia'
   'Goerli': '"Holesky", or Sepolia'
