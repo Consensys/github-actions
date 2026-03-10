@@ -135,6 +135,7 @@ Medalla
 [Mm]empool
 Merkle
 Merkleroot
+Maru
 MetaMask
 MkDocs
 Mobula
