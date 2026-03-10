@@ -5,68 +5,44 @@ level: warning
 action:
   name: replace
 swap:
-  # Linea Coordinator system component probably proper noun
-  'coordinator': '"Coordinator"'
-  # Linea Prover system component probably proper noun
-  'prover': '"Prover"'
-  # Linea Voyage
-  'voyage': '"Voyage"'
+  "Auth Connection Id": "Auth Connection ID"
+  "Auth connection ID": "Auth Connection ID"
+  "auth connection id": "Auth Connection ID"
   'besu': '"Besu"'
-  # Maru - proper noun
-  'maru': '"Maru"'
+  'coordinator': '"Coordinator"'
   'Dapp': '"dapp"'
-  'goerli': '"holesky", or sepolia'
-  'Goerli': '"Holesky", or Sepolia'
-  # tested but this apparently failed to be handled with [Oo]nchain in accept
-  'on-chain': 'onchain'
-  'On-chain': 'Onchain'
-  'on chain': 'onchain'
-  'On chain': 'Onchain'
-  # tested but this apparently failed to be handled with [Oo]ffchain in accept
-  'off-chain': 'offchain'
+  "Embedded wallets": "Embedded Wallets"
+  "embedded Wallets": "Embedded Wallets"
+  "embedded wallets": "Embedded Wallets"
+  "facebook": "Facebook"
+  "google": "Google"
+  'maru': '"Maru"'
+  'mastercard': '"Mastercard"'
+  "MetaMask": "MetaMask"
+  "metamask": "MetaMask"
+  "MetaMask smart accounts": "MetaMask Smart Accounts"
+  "Metamask Smart Accounts": "MetaMask Smart Accounts"
+  "metamask smart accounts": "MetaMask Smart Accounts"
+  'Off chain': 'Offchain'
   'Off-chain': 'Offchain'
   'off chain': 'offchain'
-  'Off chain': 'Offchain'
-  # this may be handled just by putting zkEVM into accept {need to test}
-  'ZK EVM': '"zkEVM"'
-  'ZKEVM': '"zkEVM"'
-  'ZK-EVM': '"zkEVM"'
-  'zk-EVM': '"zkEVM"'
-  'zk EVM': '"zkEVM"'
-  # MetaMask - enforce proper capitalization
-  "metamask": "MetaMask"
-  "Metamask": "MetaMask"
-  # Embedded Wallets - enforce proper capitalization
-  "embedded wallets": "Embedded Wallets"
-  "embedded Wallets": "Embedded Wallets"
-  "Embedded wallets": "Embedded Wallets"
-  # Wallet Services - enforce proper capitalization
-  "wallet services": "Wallet Services"
-  "wallet Services": "Wallet Services"
-  "Wallet services": "Wallet Services"
-  # MetaMask Smart Accounts - enforce proper capitalization
-  "metamask smart accounts": "MetaMask Smart Accounts"
-  "Metamask Smart Accounts": "MetaMask Smart Accounts"
-  "MetaMask smart accounts": "MetaMask Smart Accounts"
-  # Auth Connection ID - enforce proper capitalization
-  "auth connection id": "Auth Connection ID"
-  "Auth connection ID": "Auth Connection ID"
-  "Auth Connection Id": "Auth Connection ID"
-  # Google - enforce proper capitalization
-  "google": "Google"
-  # Facebook - enforce proper capitalization
-  "facebook": "Facebook"
-  # Twitter - enforce proper capitalization
-  "twitter": "Twitter"
-  # Mastercard - enforce proper capitalization
-  'mastercard': '"Mastercard"'
-  # WalletConnect - enforce proper capitalization
-  'walletconnect': '"WalletConnect"'
-  'Walletconnect': '"WalletConnect"'
-  # Shamir's - enforce proper capitalization
+  'off-chain': 'offchain'
+  'On chain': 'Onchain'
+  'On-chain': 'Onchain'
+  'on chain': 'onchain'
+  'on-chain': 'onchain'
+  "polkadot": "Polkadot"
+  'prover': '"Prover"'
   shamir: "Shamir's"
   "shamir's": "Shamir's"
-  # Polkadot - enforce proper capitalization
-  "polkadot": "Polkadot"
-
-
+  'voyage': '"Voyage"'
+  "Wallet services": "Wallet Services"
+  "wallet Services": "Wallet Services"
+  "wallet services": "Wallet Services"
+  'Walletconnect': '"WalletConnect"'
+  'walletconnect': '"WalletConnect"'
+  'ZK EVM': '"zkEVM"'
+  'ZK-EVM': '"zkEVM"'
+  'ZKEVM': '"zkEVM"'
+  'zk EVM': '"zkEVM"'
+  'zk-EVM': '"zkEVM"'
