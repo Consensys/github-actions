@@ -125,6 +125,7 @@ Logback
 Logrus
 Logstash
 LPs
+LSTs?
 [mM]ainnet[s]?
 Markdown
 Markdownlint
@@ -203,6 +204,7 @@ Redocusaurus
 [rR]esync(?:s|ing|ed)?(?:'s)?
 Rinkeby
 Roboto
+[rR]ollout[s]?(?:'s)?
 Ropsten
 RPCs
 [Rr]unbook[s]?
