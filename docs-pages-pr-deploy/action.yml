@@ -17,8 +17,9 @@ runs:
         repository: Consensys/github-actions
         path: .github-actions
 
+    # v2.8.0
     - name: Get additional Github env vars # vars from Github env, can not be modified by users
-      uses: FranzDiebold/github-env-vars-action@v2
+      uses: FranzDiebold/github-env-vars-action@1791216cd180e6578dd1d67fb8d2852b883a5f53
 
     - name: generate PR slug
       shell: sh
@@ -46,8 +47,9 @@ runs:
         npm ci --only=production
         npm run build
 
+    # v4.8.0
     - name: Deploy Preview
-      uses: JamesIves/github-pages-deploy-action@v4
+      uses: JamesIves/github-pages-deploy-action@d92aa235d04922e8f08b40ce78cc5442fcfbfa2f
       with:
         branch: gh-pages
         folder: build # The folder the action should deploy.
@@ -55,8 +57,9 @@ runs:
         commit-message: Preview for ${{ steps.generate_pr_slug.outputs.slug }}
         single-commit: true
 
+    # v3.0.2
     - name: Add comment with link to preview doc
-      uses: marocchino/sticky-pull-request-comment@v2
+      uses: marocchino/sticky-pull-request-comment@70d2764d1a7d5d9560b100cbea0077fc8f633987
       with:
         header: preview
         recreate: true

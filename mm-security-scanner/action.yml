@@ -20,8 +20,9 @@ runs:
         repository: Consensys/github-actions
         path: .github-actions
 
+    # latest main (no releases; pinned 2026-03-21)
     - name: MetaMask Security Code Scanner
-      uses: MetaMask/Security-Code-Scanner@main
+      uses: MetaMask/Security-Code-Scanner@5a08cec8d2a944cfe3bd86209a290af52e49a99c
       with:
         repo: ${{ github.repository }}
         paths_ignored: |

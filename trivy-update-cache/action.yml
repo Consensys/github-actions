@@ -39,8 +39,9 @@ runs:
         tar -xzf javadb.tar.gz -C $GITHUB_WORKSPACE/.cache/trivy/java-db
         rm javadb.tar.gz
 
+    # v5.0.4
     - name: Cache DBs
-      uses: actions/cache/save@v4
+      uses: actions/cache/save@v5
       with:
         path: ${{ github.workspace }}/.cache/trivy
         key: cache-trivy-${{ steps.date.outputs.date }}

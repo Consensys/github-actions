@@ -39,8 +39,9 @@ runs:
       id: generate_pr_slug
       run: echo "::set-output name=slug::PR-${{ github.event.number }}"   
 
+    # v4.8.0
     - name: Deploy Preview
-      uses: JamesIves/github-pages-deploy-action@v4
+      uses: JamesIves/github-pages-deploy-action@d92aa235d04922e8f08b40ce78cc5442fcfbfa2f
       with:
         branch: gh-pages
         folder: build # The folder the action should deploy.

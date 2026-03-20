@@ -25,29 +25,32 @@ runs:
         repository: Consensys/github-actions
         path: .github-actions
 
+    # v4.0.0
     - name: set up docker buildx
-      uses: docker/setup-buildx-action@v3   
+      uses: docker/setup-buildx-action@4d04d5d9486b7bd6fa91e7baf45bbb4f8b9deedd 
 
-    # aws-actions/configure-aws-credentials@v5
+    # v6
     - name: configure aws credentials
-      uses: aws-actions/configure-aws-credentials@00943011d9042930efac3dcd3a170e4273319bc8
+      uses: aws-actions/configure-aws-credentials@8df5847569e6427dd6c4fb1cf565c83acfa8afa7
       with:
         role-to-assume: ${{ inputs.ECR_ROLE_TO_ASSUME }} 
         role-session-name: ecr-scan-push
         role-duration-seconds: 1200
         aws-region: us-east-1
 
+    # v2.1.0
     - name: login to amazon ecr
       id: login-ecr
-      uses: aws-actions/amazon-ecr-login@v2
+      uses: aws-actions/amazon-ecr-login@261fc3d4806db1fa66a15cc11113c456db8870a7
 
     - name: prep for container
       shell: bash
       run: |
         echo "BUILD_DATE=$(date --rfc-3339=date)" >> ${GITHUB_ENV}
 
+    # v7.0.0
     - name: build the container
-      uses: docker/build-push-action@v6
+      uses: docker/build-push-action@d08e5c354a6adb9ed34480a06d141179aa583294
       env:
         DOCKER_BUILD_SUMMARY: false
       with:
@@ -62,8 +65,9 @@ runs:
           BUILD_DATE=${{ env.BUILD_DATE }}
         tags: ${{ steps.login-ecr.outputs.registry }}${{ inputs.DOCKER_REPO }}:latest
 
+    # 0.35.0
     - name: Run Trivy vulnerability scanner
-      uses: aquasecurity/trivy-action@0.33.0
+      uses: aquasecurity/trivy-action@57a97c7e7821a5776cebc9bb87c984fa69cba8f1
       with:
         image-ref: ${{ inputs.DOCKER_REPO }}:latest
         format: 'sarif'
@@ -103,8 +107,9 @@ runs:
         ' >> "$GITHUB_STEP_SUMMARY"
 
     # on ecr this doesn't tag the individual images, so we do this 3x (the last two are merely tags)
+    # v7.0.0
     - name: build and push the combined manifest
-      uses: docker/build-push-action@v6
+      uses: docker/build-push-action@d08e5c354a6adb9ed34480a06d141179aa583294
       if: success()        
       env:
         DOCKER_BUILD_SUMMARY: false
@@ -122,8 +127,9 @@ runs:
           ${{ inputs.DOCKER_REPO }}:${{ env.BUILD_DATE }}
           ${{ inputs.DOCKER_REPO }}:latest
 
+    # v7.0.0
     - name: tag the linux/amd64
-      uses: docker/build-push-action@v6
+      uses: docker/build-push-action@d08e5c354a6adb9ed34480a06d141179aa583294
       env:
         DOCKER_BUILD_SUMMARY: false
       with:
@@ -140,8 +146,9 @@ runs:
           ${{ inputs.DOCKER_REPO }}:${{ env.BUILD_DATE }}-amd64
           ${{ inputs.DOCKER_REPO }}:latest-amd64
 
+    # v7.0.0
     - name: tag the linux/arm64
-      uses: docker/build-push-action@v6
+      uses: docker/build-push-action@d08e5c354a6adb9ed34480a06d141179aa583294
       env:
         DOCKER_BUILD_SUMMARY: false
       with:

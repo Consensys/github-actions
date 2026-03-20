@@ -22,8 +22,8 @@ runs:
         repository: Consensys/github-actions
         path: .github-actions
 
-    # 7dee1b0c1557f278e5c7dc244927139d78c0e22a = v47.0.4
-    - uses: tj-actions/changed-files@7dee1b0c1557f278e5c7dc244927139d78c0e22a
+    # v47.0.5
+    - uses: tj-actions/changed-files@22103cc46bda19c2b464ffe86db46df6922fd323
       id: changed-files
       with:
         path: "."  # look in the main repo root

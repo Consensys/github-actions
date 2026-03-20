@@ -11,8 +11,9 @@ inputs:
 runs:
   using: "composite"
   steps:
+    # v2.8.0
     - name: Get additional Github env vars # vars from Github env, can not be modified by users
-      uses: FranzDiebold/github-env-vars-action@v2
+      uses: FranzDiebold/github-env-vars-action@1791216cd180e6578dd1d67fb8d2852b883a5f53
 
     - name: generate PR slug
       shell: sh
@@ -32,8 +33,9 @@ runs:
         git commit -am "Automated deletion"
         git push
 
+    # v3.0.2
     - name: Remove comment to preview doc link
-      uses: marocchino/sticky-pull-request-comment@v2
+      uses: marocchino/sticky-pull-request-comment@70d2764d1a7d5d9560b100cbea0077fc8f633987
       with:
         header: preview
         delete: true

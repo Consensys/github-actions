@@ -22,16 +22,18 @@ runs:
         repository: Consensys/github-actions
         path: .github-actions
 
+    # v4.0.0
     - name: set up docker buildx
-      uses: docker/setup-buildx-action@v3   
+      uses: docker/setup-buildx-action@4d04d5d9486b7bd6fa91e7baf45bbb4f8b9deedd 
   
     - name: prep for container
       shell: bash
       run: |
         echo "BUILD_DATE=$(date --rfc-3339=date)" >> ${GITHUB_ENV}
 
+    # v7.0.0
     - name: build the container
-      uses: docker/build-push-action@v6
+      uses: docker/build-push-action@d08e5c354a6adb9ed34480a06d141179aa583294
       env:
         DOCKER_BUILD_SUMMARY: false
       with:
@@ -47,8 +49,9 @@ runs:
           BUILD_DATE=${{ env.BUILD_DATE }}
         tags: ${{ inputs.DOCKER_REPO }}:latest
 
+    # 0.35.0
     - name: Run Trivy vulnerability scanner
-      uses: aquasecurity/trivy-action@0.34.0
+      uses: aquasecurity/trivy-action@57a97c7e7821a5776cebc9bb87c984fa69cba8f1
       with:
         image-ref: ${{ inputs.DOCKER_REPO }}:latest
         format: 'sarif'
@@ -87,8 +90,9 @@ runs:
           }
         ' >> "$GITHUB_STEP_SUMMARY"
 
+    # v7.0.0
     - name: push the container
-      uses: docker/build-push-action@v6
+      uses: docker/build-push-action@d08e5c354a6adb9ed34480a06d141179aa583294
       if: success()        
       env:
         DOCKER_BUILD_SUMMARY: false

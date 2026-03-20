@@ -40,8 +40,9 @@ runs:
         repository: Consensys/github-actions
         path: .github-actions
 
+    # v2.3.3
     - name: Slack notify
-      uses: rtCamp/action-slack-notify@v2
+      uses: rtCamp/action-slack-notify@e31e87e03dd19038e411e38ae27cbad084a90661
       env:
         SLACK_USERNAME: ${{ inputs.SLACK_USERNAME }}
         SLACK_WEBHOOK: ${{ inputs.SLACK_WEBHOOK }}
