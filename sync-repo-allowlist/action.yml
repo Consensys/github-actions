@@ -1,0 +1,54 @@
+# SPDX-License-Identifier: Apache-2.0
+---
+name: 'sync gha allowlist'
+description: 'Composite action to keep the repo allowlist in sync with the actions'
+
+inputs:
+  GH_APP_ID:
+    description: 'GitHub App ID'
+    required: true
+  GH_PRIVATE_KEY:
+    description: 'GitHub App Private Key'
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout tools repo
+      uses: actions/checkout@v6
+      with:
+        repository: Consensys/github-actions
+        path: .github-actions
+
+    - name: Generate Token
+      id: generate_token
+      uses: actions/create-github-app-token@v1
+      with:
+        app-id: ${{ inputs.GH_APP_ID }}
+        private-key: ${{ inputs.GH_PRIVATE_KEY }}
+    
+    - name: Update GitHub Allowlist
+      shell: bash 
+      env:
+        GH_TOKEN: ${{ steps.generate_token.outputs.token }}
+      run: |
+        FIXED_PATTERNS='["actions/*", "consensys/github-actions/*"]'
+        
+        # 1. Look for SHAs in the CALLER's repository
+        # We use $GITHUB_WORKSPACE to ensure we are looking at the right files
+        EXTRACTED=$(grep -rE "uses: [a-zA-Z0-9-]+/[a-zA-Z0-9._-]+@[a-f0-9]{40}" "$GITHUB_WORKSPACE"/.github/workflows/*.yml | \
+                    sed -E 's/.*uses: ([^ ]+).*/\1/' | sort -u || echo "")
+
+        # 2. Combine into JSON (handling empty extraction gracefully)
+        if [ -z "$EXTRACTED" ]; then
+          FINAL_JSON="$FIXED_PATTERNS"
+        else
+          FINAL_JSON=$(echo "$EXTRACTED" | jq -R . | jq -s ". + $FIXED_PATTERNS")
+        fi
+
+        # 3. Push to the Repo API
+        gh api --method PUT /repos/${{ github.repository }}/actions/permissions/selected-actions \
+          -f enabled=true \
+          --input <(echo "{\"selected_actions\": $FINAL_JSON}")
+
+        echo "Allowlist updated via GitHub App for ${{ github.repository }}."

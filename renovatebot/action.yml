@@ -1,0 +1,41 @@
+# SPDX-License-Identifier: Apache-2.0
+---
+name: 'renovatebot'
+description: 'Composite action to ruin renovatebot on the versions of the GHA'
+
+inputs:
+  GH_APP_ID:
+    description: 'GitHub App ID'
+    required: true
+  GH_PRIVATE_KEY:
+    description: 'GitHub App Private Key'
+    required: true
+  GH_REPOSITORY:
+    description: 'Github repo to look at'
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout tools repo
+      uses: actions/checkout@v6
+      with:
+        repository: Consensys/github-actions
+        path: .github-actions
+
+    - name: Generate Token
+      id: generate_token
+      uses: actions/create-github-app-token@v1
+      with:
+        app-id: ${{ inputs.GH_APP_ID }}
+        private-key: ${{ inputs.GH_PRIVATE_KEY }}
+
+    - name: Run Renovate
+      uses: renovatebot/github-action@v40.1.11
+      with:
+        configurationFile: renovate.json
+        token: ${{ steps.generate_token.outputs.token }}
+      env:
+        RENOVATE_REPOSITORIES: ${{ inputs.GH_REPOSITORY }}
+        RENOVATE_PLATFORM: github
+        # LOG_LEVEL: debug
