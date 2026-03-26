@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: Apache-2.0
 ---
 name: 'renovatebot'
-description: 'Composite action to ruin renovatebot on the versions of the GHA'
+description: 'Composite action to run renovatebot on the versions of the GHA'
 
 inputs:
   GH_APP_ID:
@@ -31,7 +31,7 @@ runs:
         private-key: ${{ inputs.GH_PRIVATE_KEY }}
 
     - name: Run Renovate
-      uses: renovatebot/github-action@v40.1.11
+      uses: renovatebot/github-action@68a3ea99af6ad249940b5a9fdf44fc6d7f14378b #v46.1.6
       with:
         configurationFile: renovate.json
         token: ${{ steps.generate_token.outputs.token }}

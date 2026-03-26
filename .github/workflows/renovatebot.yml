@@ -3,9 +3,7 @@ name: renovatebot
 on:
   push:
     branches:
-      - master
-    paths:
-      - '.github/workflows/**'
+      - main
   workflow_dispatch:
 
 jobs:

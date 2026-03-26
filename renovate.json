@@ -6,16 +6,15 @@
   "dependencyDashboard": false,
   "packageRules": [
     {
-      "description": "Step 1: Pin all GitHub Actions to sha256 digests by default",
+      "description": "1. Pin all GitHub Actions to sha256 digests by default",
       "matchManagers": ["github-actions"],
       "pinDigests": true
     },
     {
-      "description": "Step 2: For trusted actions, allow updates",
+      "description": "2. For trusted actions, allow updates",
       "matchManagers": ["github-actions"],
       "matchPackageNames": [
-        "actions/**",
-        "consensys/github-actions/**"
+        "actions/**"
       ],
       "pinDigests": true
     }

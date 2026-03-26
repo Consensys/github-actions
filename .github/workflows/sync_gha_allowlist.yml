@@ -3,9 +3,7 @@ name: sync_gha_allowlist
 on:
   push:
     branches:
-      - master
-    paths:
-      - '.github/workflows/**'
+      - main
   workflow_dispatch:
 
 jobs:
