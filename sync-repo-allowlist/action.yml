@@ -27,6 +27,13 @@ runs:
         app-id: ${{ inputs.GH_APP_ID }}
         private-key: ${{ inputs.GH_PRIVATE_KEY }}
     
+    - name: Debug Token Permissions
+      shell: bash
+      env:
+        GH_TOKEN: ${{ steps.generate_token.outputs.token }}
+      run: |
+        gh api /installation/repositories | jq '.repositories[0].permissions'
+
     - name: Update GitHub Allowlist
       shell: bash 
       env:
