@@ -31,7 +31,7 @@ runs:
 
     # v6
     - name: configure aws credentials
-      uses: aws-actions/configure-aws-credentials@8df5847569e6427dd6c4fb1cf565c83acfa8afa7
+      uses: aws-actions/configure-aws-credentials@f86e2d2212ab16dbfe0af747dcde6fd35ff06eef
       with:
         role-to-assume: ${{ inputs.ECR_ROLE_TO_ASSUME }} 
         role-session-name: ecr-scan-push
