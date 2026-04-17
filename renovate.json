@@ -3,8 +3,19 @@
   "extends": [
     "config:recommended"
   ],
-  "enabledManagers": ["github-actions"],
+  "enabledManagers": ["github-actions", "npm"],
   "dependencyDashboard": false,
+  "customManagers": [
+    {
+      "customType": "regex",
+      "fileMatch": ["action\\.yml$"],
+      "matchStrings": [
+        "npm install -g @umbrelladocs/linkspector@(?<currentValue>[^\\s\\n]+)"
+      ],
+      "depNameTemplate": "@umbrelladocs/linkspector",
+      "datasourceTemplate": "npm"
+    }
+  ],
   "packageRules": [
     {
       "description": "Pin all GitHub Actions to SHA digests",
@@ -12,6 +23,12 @@
       "pinDigests": true,
       "minimumReleaseAge": "7 days",
       "groupName": "Renovatebot GHA Updates"
+    },
+    {
+      "description": "Group npm and inline npm dependency updates",
+      "matchManagers": ["npm", "custom.regex"],
+      "minimumReleaseAge": "7 days",
+      "groupName": "NPM Updates"
     }
   ]
 }
