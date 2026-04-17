@@ -1,0 +1,9 @@
+# Consensys documentation style: avoid em dashes (Microsoft Writing Style Guide; Consensys style guide).
+# Does not flag en dashes (often used in numeric ranges and compound modifiers).
+
+extends: existence
+message: "Avoid em dashes (—); use commas, parentheses, semicolons, or rephrase."
+level: error
+nonword: true
+tokens:
+  - '—'

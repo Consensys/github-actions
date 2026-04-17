@@ -8,40 +8,53 @@ swap:
   "Auth Connection Id": "Auth Connection ID"
   "Auth connection ID": "Auth Connection ID"
   "auth connection id": "Auth Connection ID"
-  'besu': '"Besu"'
-  'coordinator': '"Coordinator"'
-  'Dapp': '"dapp"'
+  "besu": "Besu"
+  "coordinator": "Coordinator"
   "Embedded wallets": "Embedded Wallets"
   "embedded Wallets": "Embedded Wallets"
   "embedded wallets": "Embedded Wallets"
   "facebook": "Facebook"
   "google": "Google"
-  'maru': '"Maru"'
-  'mastercard': '"Mastercard"'
-  "Metamask": "MetaMask"
-  "metamask": "MetaMask"
+  "log in": "sign in"
+  "Log in": "Sign in"
+  "log out": "sign out"
+  "Log out": "Sign out"
+  "log-in": "sign-in"
+  "Log-in": "Sign-in"
+  "log-out": "sign-out"
+  "Log-out": "Sign-out"
+  "login": "sign-in"
+  "Login": "Sign-in"
+  "logout": "sign-out"
+  "Logout": "Sign-out"
+  "maru": "Maru"
+  "mastercard": "Mastercard"
   "MetaMask smart accounts": "MetaMask Smart Accounts"
   "Metamask Smart Accounts": "MetaMask Smart Accounts"
   "metamask smart accounts": "MetaMask Smart Accounts"
-  'Off chain': 'Offchain'
-  'Off-chain': 'Offchain'
-  'off chain': 'offchain'
-  'off-chain': 'offchain'
-  'On chain': 'Onchain'
-  'On-chain': 'Onchain'
-  'on chain': 'onchain'
-  'on-chain': 'onchain'
+  "Off chain": "Offchain"
+  "Off-chain": "Offchain"
+  "off chain": "offchain"
+  "off-chain": "offchain"
+  "On chain": "Onchain"
+  "On-chain": "Onchain"
+  "on chain": "onchain"
+  "on-chain": "onchain"
   "polkadot": "Polkadot"
-  shamir: "Shamir's"
+  "shamir": "Shamir's"
   "shamir's": "Shamir's"
-  'voyage': '"Voyage"'
+  "voyage": "Voyage"
+  "wallet adapter": "Wallet Adapter"
+  "wallet-adapter": "Wallet Adapter"
   "Wallet services": "Wallet Services"
   "wallet Services": "Wallet Services"
   "wallet services": "Wallet Services"
-  'Walletconnect': '"WalletConnect"'
-  'walletconnect': '"WalletConnect"'
-  'ZK EVM': '"zkEVM"'
-  'ZK-EVM': '"zkEVM"'
-  'ZKEVM': '"zkEVM"'
-  'zk EVM': '"zkEVM"'
-  'zk-EVM': '"zkEVM"'
+  "wallet standard": "Wallet Standard"
+  "wallet-standard": "Wallet Standard"
+  "Walletconnect": "WalletConnect"
+  "walletconnect": "WalletConnect"
+  "ZK EVM": "zkEVM"
+  "ZK-EVM": "zkEVM"
+  "ZKEVM": "zkEVM"
+  "zk EVM": "zkEVM"
+  "zk-EVM": "zkEVM"
