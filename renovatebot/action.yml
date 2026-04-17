@@ -18,20 +18,20 @@ runs:
   using: "composite"
   steps:
     - name: Checkout tools repo
-      uses: actions/checkout@v6
+      uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
       with:
         repository: Consensys/github-actions
         path: .github-actions
 
     - name: Generate Token
       id: generate_token
-      uses: actions/create-github-app-token@v1
+      uses: actions/create-github-app-token@1b10c78c7865c340bc4f6099eb2f838309f1e8c3 # v3
       with:
         app-id: ${{ inputs.GH_APP_ID }}
         private-key: ${{ inputs.GH_PRIVATE_KEY }}
 
     - name: Run Renovate
-      uses: renovatebot/github-action@68a3ea99af6ad249940b5a9fdf44fc6d7f14378b #v46.1.6
+      uses: renovatebot/github-action@eb932558ad942cccfd8211cf535f17ff183a9f74 # v46.1.9
       with:
         configurationFile: renovate.json
         token: ${{ steps.generate_token.outputs.token }}
