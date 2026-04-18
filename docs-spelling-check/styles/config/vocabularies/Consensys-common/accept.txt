@@ -1,6 +1,7 @@
 0x[0-9a-fA-F]{40}
 ^AMMs?$
 Algolia
+ALT[s]?(?:'s)?
 Ansible
 [aA]utogenerat(?:ing|ed)?
 [aA]ttester[s]?
@@ -12,12 +13,16 @@ AWS Key Management Service
 AWS Secrets Manager
 Axelar
 Azure Key Vault
+Bepolia
+Berachain
 BerkeleyDB
 Bintray
+Bokuto
 [bB]undler[s]?
 Cakeshop
 [cC]alldata
 C-Chain
+Citrea
 CCL|Confidential Computing Layer
 Chatbot
 [cC]lasspath[s]?
@@ -25,6 +30,7 @@ Chatbot
 [cC]lientSecret
 Codefi
 [cC]oinbase
+[cC]onnect(?:'s)?
 [cC]onfig
 Consensys
 [cC]ounterpart(?:y|ies)
@@ -39,6 +45,8 @@ deadlineHeight
 [dD]eauthoriz(?:e|ing)
 [dD]eeplink(?:s|ing)?
 ^DeFi$
+Degit
+[dD]elegator[s]?(?:'s)?
 [dD]enylist[s]?
 [dD]eserializ(?:e|ing)
 [dD]eserialization
@@ -66,6 +74,7 @@ Ethereum
 ^[Ee]therscan$
 Etherspot
 ^eth_sendbundle$
+EVM(?:'s)?
 Figma
 Fusaka
 Filecoin
@@ -89,6 +98,7 @@ gRPC
 Hashi[cC]orp
 [hH]ardfork[s]?(?:'s)?
 Helmfile
+Hemi
 Hexagate
 Homebrew
 [Hh]oodi
@@ -109,6 +119,7 @@ Kafka
 Kaleido
 [kK]alium
 Katacoda
+Katana
 [kK]eystore[s]?
 [kK]eytool[s]?
 [kK]keyName
@@ -121,6 +132,7 @@ libsodium
 Lineaplorer
 Linea Voyage
 Linea Yield Boost
+Linkspector
 Logback
 Logrus
 Logstash
@@ -169,6 +181,7 @@ paramStructure
 Pectra
 Pegasys
 [pP]ermission(?:ing|ed)?
+[pP]refund
 [pP]repend(?:s|ing|ed)?
 [Pp]recompile[s]?
 Photoshop
@@ -194,17 +207,20 @@ ReadTheDocs
 [rR]ebas(?:e|es|ing|ed)?
 [rR]ebalanc(?:e|es|ing|ed)?(?:'s)?
 [rR]edelegat(?:e|es|ing|ed|ion|ions)?
+[rR]edemption[s]?
 Redis
 [rR]edistributable[s]?
 Redocusaurus
 [rR]eentrancy
 [rR]elayer[s]?
+Reown
 [rR]epurposing
 [rR]estak(?:e|es|ing|ed)?
 [rR]esync(?:s|ing|ed)?(?:'s)?
 Rinkeby
 Roboto
 [rR]ollout[s]?(?:'s)?
+Ronin
 Ropsten
 RPCs
 [Rr]unbook[s]?
@@ -244,10 +260,13 @@ Telegraf
 Tezos
 Tellor
 [tT]enantId
+Tenderly
 [tT]estnet[s]?
 thirdweb
 tmux
+toolkit's
 [tT]rie[s]?
+Trivy
 [tT]ruststore[s]?
 UAs
 [uU]nderflow[s]?

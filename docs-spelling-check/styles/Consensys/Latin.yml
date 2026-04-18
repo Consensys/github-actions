@@ -6,3 +6,5 @@ action:
   name: replace
 swap:
   de facto: default
+  "e.g.": "for example"
+  "i.e.": "that is"
