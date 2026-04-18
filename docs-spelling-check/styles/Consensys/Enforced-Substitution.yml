@@ -7,12 +7,8 @@ level: error
 action:
   name: replace
 swap:
-  "Backend": "Back end"
-  "backend": "backend"
   "DApp": "Dapp"
   "dApp": "dapp"
-  "Frontend": "Front end"
-  "frontend": "front end"
   "It is recommended": "We recommend"
   "It's recommended": "We recommend"
   "it is recommended": "we recommend"
