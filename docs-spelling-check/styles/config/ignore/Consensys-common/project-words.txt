@@ -38,6 +38,7 @@ allowlist
 allowlisted
 allowlisting
 allowlists
+alt
 amarok
 ankr
 anonymized
