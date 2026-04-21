@@ -1,0 +1,11 @@
+extends: substitution
+message: Consider standard format, %s instead of "%s".
+ignorecase: false
+level: error
+action:
+  name: replace
+swap:
+  "It is recommended": "We recommend"
+  "It's recommended": "We recommend"
+  "it is recommended": "we recommend"
+  "it's recommended": "we recommend"
