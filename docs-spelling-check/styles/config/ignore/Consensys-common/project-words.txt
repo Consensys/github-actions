@@ -289,7 +289,6 @@ dencun
 deps
 deri
 deso
-destructuring
 devcontainers
 deversi
 devnet
@@ -1404,8 +1403,6 @@ vitidiary
 vjeux
 vwap
 vyper
-wagmi
-wagmi's
 waitlist
 waivable
 waku

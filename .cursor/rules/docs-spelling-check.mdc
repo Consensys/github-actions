@@ -1,0 +1,46 @@
+---
+description: Vale linting and style dirs — only edit config and Consensys; never modify synced packages
+globs: docs-spelling-check/**
+alwaysApply: false
+---
+
+# docs-spelling-check (Vale)
+
+Paths below are relative to the `docs-spelling-check/` directory.
+
+## File access
+
+**Only modify** files under:
+
+- `styles/config/` (and subdirectories)
+- `styles/Consensys/` (and subdirectories)
+
+**Do not** modify, edit, or create files under:
+
+- `styles/Microsoft/` (external; lost on sync)
+- `styles/proselint/` (external; lost on sync)
+- `styles/write-good/` (external; lost on sync)
+- Any path outside `styles/config/` and `styles/Consensys/`
+
+## Workflow
+
+1. **Read-only** in `styles/Microsoft/`, `styles/proselint/`, and `styles/write-good/` for reference only.
+2. **Edits** belong in `styles/config/` (e.g. `project-words`, vocabulary) and `styles/Consensys/` (custom YAML style rules, including `Spelling.yml`).
+3. **Before changing a file**, confirm the path is under an allowed directory.
+4. If asked to change restricted files, decline and note they are synced packages that get overwritten.
+
+## Context
+
+Vale lints the docs. `styles/config/` holds project config and vocabulary; `styles/Consensys/` holds custom rules. `Microsoft/`, `proselint/`, and `write-good/` are external synced packages.
+
+## Vale dictionary: reducing false positives
+
+When Vale flags a word or term incorrectly, add or adjust project terminology so CI stays clean.
+
+### `project-words.txt` vs `accept.txt`
+
+These look similar but are wired differently in Vale:
+
+- **`styles/config/ignore/Consensys-common/project-words.txt`** — Referenced from **`styles/Consensys/Spelling.yml`**. Use for **plain words and phrases** the spell checker should not flag: product names, tech jargon, and people’s names, usually **one simple entry per line** (case-insensitive; applies across case variants). This is the usual place to fix “unknown word” false positives for **`Consensys.Spelling`**.
+
+- **`styles/config/vocabularies/Consensys-common/accept.txt`** — Part of the **`Vocab = Consensys-common`** set in `.vale.ini`. Use for **regular-expression patterns** (and flexible spellings) that should be treated as valid project terminology—often entries that are **not** a single literal word. Pairs with **`reject.txt`**, which lists patterns Vale should **not** allow.
