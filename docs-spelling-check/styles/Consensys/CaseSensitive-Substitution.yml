@@ -10,6 +10,8 @@ swap:
   "auth connection id": "Auth Connection ID"
   "besu": "Besu"
   "coordinator": "Coordinator"
+  "Defaults to": "The default is"
+  "defaults to": "the default is"
   "Embedded wallets": "Embedded Wallets"
   "embedded Wallets": "Embedded Wallets"
   "embedded wallets": "Embedded Wallets"
