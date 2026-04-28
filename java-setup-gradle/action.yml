@@ -21,15 +21,3 @@ runs:
     # v5.0.2
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@0723195856401067f7a2779048b490ace7a47d7c
-
-    - name: Cache Gradle dependencies
-      uses: actions/cache@668228422ae6a00e4ad889ee87cd7109ec5666a7 # v5
-      with:
-        path: |
-          ~/.gradle/caches
-          ~/.gradle/wrapper
-        key: ${{ runner.os }}-gradle-${{ hashFiles('build.gradle') }}-${{ github.ref }}-${{ github.sha }}
-        restore-keys: |
-          ${{ runner.os }}-gradle-${{ hashFiles('build.gradle') }}-${{ github.ref }}-
-          ${{ runner.os }}-gradle-${{ hashFiles('build.gradle') }}-
-          ${{ runner.os }}-gradle-
