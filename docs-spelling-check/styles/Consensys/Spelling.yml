@@ -1,0 +1,5 @@
+extends: spelling
+message: "Did you really mean '%s'? Ignore this alert if this is a false positive, or ask Cursor to add the term to the Vale dictionary."
+level: warning
+ignore:
+  - config/ignore/Consensys-common/project-words.txt
