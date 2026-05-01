@@ -4,6 +4,10 @@ name: 'java-setup-gradle'
 description: 'java-setup-gradle'
 
 inputs:
+  VERSION:
+    description: "jdk version to use"
+    required: false
+    default: '21'
   DISTRIBUTION:
     description: "jdk distribution to use"
     required: false
@@ -12,10 +16,10 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Set up JDK 21
+    - name: Set up JDK
       uses: actions/setup-java@be666c2fcd27ec809703dec50e508c2fdc7f6654 # v5.2.0
       with:
-        java-version: 21
+        java-version: ${{ inputs.VERSION }}
         distribution: '${{ inputs.DISTRIBUTION }}'
 
     # v5.0.2
