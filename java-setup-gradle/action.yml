@@ -7,7 +7,7 @@ inputs:
   VERSION:
     description: "jdk version to use"
     required: false
-    default: '21'
+    default: '25'
   DISTRIBUTION:
     description: "jdk distribution to use"
     required: false
