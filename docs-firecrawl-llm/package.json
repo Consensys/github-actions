@@ -4,7 +4,7 @@
   "main": "index.js",
   "type": "module",
   "dependencies": {
-    "@mendable/firecrawl-js": "^4.0.0",
+    "@mendable/firecrawl-js": "^4.25.2",
     "dotenv": "^17.0.0"
   },
   "scripts": {
