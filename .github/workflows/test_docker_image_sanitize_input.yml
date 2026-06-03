@@ -1,0 +1,75 @@
+name: test_docker_image_sanitize_input
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - '.github/actions/sanitize-docker-input/**'
+  pull_request:
+    paths:
+      - '.github/actions/sanitize-docker-input/**'
+  workflow_dispatch:
+
+jobs:
+  # Test cases that are supposed to succeed
+  test-valid-inputs:
+    runs-on: ubuntu-24.04
+    strategy:
+      matrix:
+        image:
+          - 'ubuntu:latest'
+          - 'nginx:1.25.2'
+          - 'my-registry.com/my-project/node:18-alpine'
+          - 'gcr.io/google-containers/pause:3.9'
+          - 'custom_image.name:v1.0.0-beta'
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+
+      # We expect all of these to finish with an exit code of 0
+      - name: Test Valid Input (${{ matrix.image }})
+        id: test_action
+        uses: ./docker_image_sanitize_input
+        with:
+          image_string: ${{ matrix.image }}
+
+      - name: Verify Output Match
+        run: |
+          if [ "${{ steps.test_action.outputs.sanitized_image }}" != "${{ matrix.image }}" ]; then
+            echo "Error: Output string did not match input!"
+            exit 1
+          fi
+
+  # Test cases that are supposed to fail (malicious or invalid format)
+  test-invalid-inputs:
+    runs-on: ubuntu-24.04
+    strategy:
+      matrix:
+        image:
+          - 'ubuntu'                                # Naked image 
+          - 'ubuntu:'                               # Missing tag definition
+          - 'ubuntu:latest; rm -rf /'               # Command injection attempt
+          - 'nginx:latest && echo hacked'           # Command injection attempt
+          - 'registry.com/image:INVALID_TAG_!!!!'   # Violates regex character limits
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+
+      # This step forces the workflow to continue even if the action fails,
+      # allowing us to assert that it DID fail properly.
+      - name: Test Invalid Input (${{ matrix.image }})
+        id: test_action
+        continue-on-error: true
+        uses: ./docker_image_sanitize_input
+        with:
+          image_string: ${{ matrix.image }}
+
+      # Assert that the step outcome was a failure. If it succeeded, the test fails.
+      - name: Verify Action Failed Properly
+        run: |
+          if [ "${{ steps.test_action.outcome }}" == "success" ]; then
+            echo "CRITICAL SECURITY FAILURE: The input '${{ matrix.image }}' bypassed validation!"
+            exit 1
+          else
+            echo "Success: Action safely caught and rejected the invalid input."
+          fi
