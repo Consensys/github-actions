@@ -18,24 +18,56 @@ inputs:
 runs:
   using: "composite"
   steps:
+    - name: Validate inputs
+      shell: bash
+      env:
+        REPO: ${{ inputs.repo }}
+        VERSION: ${{ inputs.version }}
+        TARBALL_NAME: ${{ inputs.tarball_name }}
+        BINARY_NAME: ${{ inputs.binary_name }}
+      run: |
+        if ! [[ "$REPO" =~ ^[A-Za-z0-9._-]+/[A-Za-z0-9._-]+$ ]]; then
+          echo "::error::Invalid repo '$REPO'. Expected 'owner/repo' using alphanumeric, dash, dot, or underscore."
+          exit 1
+        fi
+        if ! [[ "$VERSION" =~ ^v?[0-9]+[A-Za-z0-9._-]*$ ]]; then
+          echo "::error::Invalid version '$VERSION'."
+          exit 1
+        fi
+        if ! [[ "$TARBALL_NAME" =~ ^[A-Za-z0-9._-]+$ ]]; then
+          echo "::error::Invalid tarball_name '$TARBALL_NAME'. Only alphanumeric, dash, dot, and underscore allowed."
+          exit 1
+        fi
+        if ! [[ "$BINARY_NAME" =~ ^[A-Za-z0-9._-]+$ ]]; then
+          echo "::error::Invalid binary_name '$BINARY_NAME'. Only alphanumeric, dash, dot, and underscore allowed."
+          exit 1
+        fi
+
     - name: Download Asset and Checksums
       shell: bash
+      env:
+        REPO: ${{ inputs.repo }}
+        VERSION: ${{ inputs.version }}
+        TARBALL_NAME: ${{ inputs.tarball_name }}
       run: |
-        echo "Downloading ${{ inputs.tarball_name }} from ${{ inputs.repo }}..."
-        curl -fsSL -O "https://github.com/${{ inputs.repo }}/releases/download/${{ inputs.version }}/${{ inputs.tarball_name }}"
-        curl -fsSL -O "https://github.com/${{ inputs.repo }}/releases/download/${{ inputs.version }}/checksums.txt"
+        echo "Downloading $TARBALL_NAME from $REPO..."
+        curl -fsSL -O "https://github.com/$REPO/releases/download/$VERSION/$TARBALL_NAME"
+        curl -fsSL -O "https://github.com/$REPO/releases/download/$VERSION/checksums.txt"
 
     - name: Verify SHA-256 Checksum
       shell: bash
+      env:
+        TARBALL_NAME: ${{ inputs.tarball_name }}
       run: |
         echo "Verifying checksum..."
-        grep "${{ inputs.tarball_name }}" checksums.txt | sha256sum --check
+        grep "$TARBALL_NAME" checksums.txt | sha256sum --check
 
     - name: Extract and Install Binary
       shell: bash
+      env:
+        TARBALL_NAME: ${{ inputs.tarball_name }}
+        BINARY_NAME: ${{ inputs.binary_name }}
       run: |
-        tar -xvf "${{ inputs.tarball_name }}"
-        sudo mv "${{ inputs.binary_name }}" /usr/local/bin/
-        
-        # Cleanup workspace archives so they don't bloat later steps
-        rm "${{ inputs.tarball_name }}" checksums.txt
+        tar -xvf "$TARBALL_NAME"
+        sudo mv "$BINARY_NAME" /usr/local/bin/
+        rm "$TARBALL_NAME" checksums.txt

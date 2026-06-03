@@ -25,11 +25,19 @@ runs:
     - if: ${{ inputs.SKIP_TEST == 'false' }}
       name: Check pages file name case
       shell: sh
+      env:
+        DOC_DIR: ${{ inputs.DOC_DIR }}
       run: |
+        case "$DOC_DIR" in
+          *[!A-Za-z0-9/_.-]*)
+            echo "::error::Invalid DOC_DIR '$DOC_DIR'. Only alphanumeric, slash, underscore, dash, and dot are allowed."
+            exit 1
+            ;;
+        esac
         ls -la .
-        echo "Testing file case in ${{ inputs.DOC_DIR }}."
+        echo "Testing file case in $DOC_DIR."
         passed=true
-        for filename in `find ${{ inputs.DOC_DIR }} -type f  \( -iname \*.md -o -iname \*.mdx \) -not -path "./node_modules/*" | ( ! grep -P -v "^.[\/0-9a-z\-\_.]+.mdx?$" )`
+        for filename in $(find "$DOC_DIR" -type f \( -iname \*.md -o -iname \*.mdx \) -not -path "./node_modules/*" | ( ! grep -P -v "^.[\/0-9a-z\-\_.]+.mdx?$" ))
         do
           echo "$filename"
           echo "::error file=$filename ::File path must be only lowercase letters, digits, - (dash) and _ (underscore)"

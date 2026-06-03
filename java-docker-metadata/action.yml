@@ -29,16 +29,28 @@ runs:
   steps:
     - name: Calculate Version
       id: docker-metadata
-      shell: bash      
+      shell: bash
+      env:
+        DOCKER_REPO: ${{ inputs.docker-repo }}
+        PUBLISH_VERSION: ${{ inputs.publish-version }}
       run:  |
+          if ! [[ "$DOCKER_REPO" =~ ^[A-Za-z0-9._/-]+$ ]]; then
+            echo "::error::Invalid docker-repo '$DOCKER_REPO'. Only alphanumeric, dash, dot, slash, and underscore allowed."
+            exit 1
+          fi
+          if ! [[ "$PUBLISH_VERSION" =~ ^[A-Za-z0-9._-]+$ ]]; then
+            echo "::error::Invalid publish-version '$PUBLISH_VERSION'. Only alphanumeric, dash, dot, and underscore allowed."
+            exit 1
+          fi
+
           # Calculate Docker Tags
-          TAGS="${{ inputs.docker-repo }}:develop"
-          if [[ "${{ inputs.publish-version }}" =~ ^([0-9]+)\.([0-9]+)\.([0-9]+)$ ]]; then
-            TAGS="${{ inputs.docker-repo }}:${{ inputs.publish-version }}"
-            TAGS="$TAGS,${{ inputs.docker-repo }}:latest"
+          TAGS="$DOCKER_REPO:develop"
+          if [[ "$PUBLISH_VERSION" =~ ^([0-9]+)\.([0-9]+)\.([0-9]+)$ ]]; then
+            TAGS="$DOCKER_REPO:$PUBLISH_VERSION"
+            TAGS="$TAGS,$DOCKER_REPO:latest"
           fi
           echo "tags=$TAGS" >> $GITHUB_OUTPUT
-          
+
           # Determine Push Flag
           if [[ "${{ github.ref }}" == "refs/heads/main" || "${{ github.ref }}" == refs/tags/* ]] && \
             [ "${{ github.event_name }}" != "pull_request" ] && \
@@ -47,7 +59,7 @@ runs:
           else
             echo "push=false" >> $GITHUB_OUTPUT
           fi
-          
+
           # Set Build Args
           echo "build-date=$(date --utc --rfc-3339=seconds)" >> $GITHUB_OUTPUT
           echo "vcs-ref=${{ github.sha }}" >> $GITHUB_OUTPUT
