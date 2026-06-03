@@ -1,0 +1,41 @@
+---
+name: 'Secure GitHub Binary Downloader'
+description: 'Downloads a release binary from GitHub and verifies its SHA-256 checksum automatically.'
+inputs:
+  version:
+    description: 'The version of the tool to download (e.g., 1.18.3)'
+    required: true
+  repo:
+    description: 'The GitHub owner/repository (e.g., kurtosis-tech/kurtosis-cli-release-artifacts)'
+    required: true
+  tarball_name:
+    description: 'The exact name of the asset file (e.g., kurtosis-cli_1.18.3_linux_amd64.tar.gz)'
+    required: true
+  binary_name:
+    description: 'The name of the compiled binary inside the archive (e.g., kurtosis)'
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Download Asset and Checksums
+      shell: bash
+      run: |
+        echo "Downloading ${{ inputs.tarball_name }} from ${{ inputs.repo }}..."
+        curl -fsSL -O "https://github.com/${{ inputs.repo }}/releases/download/${{ inputs.version }}/${{ inputs.tarball_name }}"
+        curl -fsSL -O "https://github.com/${{ inputs.repo }}/releases/download/${{ inputs.version }}/checksums.txt"
+
+    - name: Verify SHA-256 Checksum
+      shell: bash
+      run: |
+        echo "Verifying checksum..."
+        grep "${{ inputs.tarball_name }}" checksums.txt | sha256sum --check
+
+    - name: Extract and Install Binary
+      shell: bash
+      run: |
+        tar -xvf "${{ inputs.tarball_name }}"
+        sudo mv "${{ inputs.binary_name }}" /usr/local/bin/
+        
+        # Cleanup workspace archives so they don't bloat later steps
+        rm "${{ inputs.tarball_name }}" checksums.txt

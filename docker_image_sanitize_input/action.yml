@@ -1,0 +1,37 @@
+name: 'Sanitize and Validate Docker Image'
+description: 'Validates a Docker image string against a strict regex and blocks any naked images.'
+inputs:
+  image_string:
+    description: 'The raw docker image string to validate'
+    required: true
+outputs:
+  sanitized_image:
+    description: 'The validated and safe docker image string'
+    value: ${{ steps.validator.outputs.validated_image }}
+
+runs:
+  using: "composite"
+  steps:
+    - id: validator
+      shell: bash
+      env:
+        RAW_IMAGE: ${{ inputs.image_string }}
+        DOCKER_REGEX: '^(?:[a-zA-Z0-9.-]+(?::[0-9]+)?\/)?(?:[a-z0-9]+(?:[._-][a-z0-9]+)*\/)*[a-z0-9]+(?:[._-][a-z0-9]+)*:[A-Za-z0-9][A-Za-z0-9._-]{0,127}$'
+      run: |
+        echo "Checking image string format..."
+
+        # 1. Reject if the string completely lacks a version tag (:) or image digest (@)
+        # This catches 'ubuntu', 'nginx', 'foo', etc. right at the door.
+        if [[ "$RAW_IMAGE" != *":"* && "$RAW_IMAGE" != *"*"* ]]; then
+          echo "::error::Invalid Input! Naked image names without a specific tag or digest (e.g., 'nginx:latest') are strictly banned."
+          exit 1
+        fi
+
+        # 2. Match against your custom regex using grep -P for PCRE support
+        if echo "$RAW_IMAGE" | grep -Pq "$DOCKER_REGEX"; then
+          echo "Success: Image format is valid and secure."
+          echo "validated_image=$RAW_IMAGE" >> $GITHUB_OUTPUT
+        else
+          echo "::error::Invalid Input! The string '$RAW_IMAGE' does not match the allowed Docker image format rules."
+          exit 1
+        fi

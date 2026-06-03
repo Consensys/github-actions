@@ -1,0 +1,85 @@
+name: Test Sanitize Docker Action
+
+on:
+  push:
+    paths:
+      - 'docker_image_sanitize_input/**'
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  # ---------------------------------------------------------------------
+  # JOB 1: Test inputs that SHOULD PASS
+  # ---------------------------------------------------------------------
+  test-valid-inputs:
+    name: Pass Case - ${{ matrix.image }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        image:
+          - 'ubuntu:latest'
+          - 'nginx:1.25.2'
+          - 'my-registry.com/my-project/node:18-alpine'
+          - 'gcr.io/google-containers/pause:3.9'
+          - 'custom_image.name:v1.0.0-beta'
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # Run the action. If it fails, the job naturally stops and turns red.
+      - name: Validate String
+        id: test_action
+        uses: ./docker_image_sanitize_input
+        with:
+          image_string: ${{ matrix.image }}
+
+      # Guardrail check to verify the output wasn't mangled
+      - name: Verify Output Match
+        run: |
+          if [ "${{ steps.test_action.outputs.sanitized_image }}" != "${{ matrix.image }}" ]; then
+            echo "::error::Output string did not match input!"
+            exit 1
+          fi
+
+  # ---------------------------------------------------------------------
+  # JOB 2: Test inputs that SHOULD FAIL (Turn Red only if they bypass security)
+  # ---------------------------------------------------------------------
+  test-invalid-inputs:
+    name: Fail Case - ${{ matrix.image }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        image:
+          - 'ubuntu'                                # Naked image (Blocked)
+          - 'nginx'                                 # Naked image (Blocked)
+          - 'foo'                                   # Naked image (Blocked)
+          - 'echo env'
+          - 'ubuntu:'                               # Missing tag definition
+          - 'ubuntu:latest; rm -rf /'               # Command injection attempt
+          - 'nginx:latest && echo hacked'           # Command injection attempt
+          - 'registry.com/image:INVALID_TAG_!!!!'   # Violates regex character limits
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # continue-on-error prevents the bad string from instantly halting the job,
+      # allowing us to test its exit status in the next step.
+      - name: Attempt Validation
+        id: test_action
+        continue-on-error: true
+        uses: ./docker_image_sanitize_input
+        with:
+          image_string: ${{ matrix.image }}
+
+      # Assert step: If the action mistakenly succeeded on a bad string, 
+      # we manually exit 1 to force this matrix box to turn RED.
+      - name: Verify Security Blocked It
+        run: |
+          if [ "${{ steps.test_action.outcome }}" == "success" ]; then
+            echo "::error::CRITICAL SECURITY FAILURE: The string '${{ matrix.image }}' bypassed validation!"
+            exit 1
+          else
+            echo "Success: Action safely caught and rejected this string."
+          fi
