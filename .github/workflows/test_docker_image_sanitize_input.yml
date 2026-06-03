@@ -25,7 +25,7 @@ jobs:
           - 'custom_image.name:v1.0.0-beta'
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v4
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
 
       # Run the action. If it fails, the job naturally stops and turns red.
       - name: Validate String
@@ -62,7 +62,7 @@ jobs:
           - 'registry.com/image:INVALID_TAG_!!!!'   # Violates regex character limits
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v4
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
 
       # continue-on-error prevents the bad string from instantly halting the job,
       # allowing us to test its exit status in the next step.
