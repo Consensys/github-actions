@@ -295,6 +295,7 @@ Web3Signer
 X-Chain
 Yield Boost
 [yY]aml|YAML
+Zesu
 Zinken
 ZKsync Era
 zkEVM
