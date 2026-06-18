@@ -133,15 +133,18 @@ libsodium
 Lineaplorer
 Linea Voyage
 Linea Yield Boost
+[Ll]ineth(?:'s)?
 Linkspector
 Logback
 Logrus
 Logstash
+LFDT
 LPs
 LSTs?
 [mM]ainnet[s]?
 Markdown
 Markdownlint
+Maru(?:'s)?
 [mM]arshal(?:ing|ed)?
 Medalla
 [Mm]empool
