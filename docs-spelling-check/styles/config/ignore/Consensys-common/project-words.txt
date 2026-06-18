@@ -286,6 +286,8 @@ déja
 delegators
 delisted
 dencun
+deployer
+deployer's
 deps
 deri
 deso
@@ -689,6 +691,7 @@ ldo
 leaderboard
 leaderboards
 lenster
+lfdt
 libdebug
 libp
 librocksdbjni
@@ -705,6 +708,8 @@ lineabuild
 lineascan
 lineaster
 linea's
+lineth
+lineth's
 linenums
 linkify
 listschains
@@ -732,6 +737,8 @@ mapbox
 marcey
 markdownextradata
 marocchino
+maru
+maru's
 massoud
 matchers
 mathbb
@@ -1036,6 +1043,7 @@ quelquejay
 queryid
 querystring
 quickstart
+quickstart's
 quickwit
 quorum
 quorumengineering
