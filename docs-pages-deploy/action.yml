@@ -37,7 +37,7 @@ runs:
     - name: generate PR slug
       shell: sh
       id: generate_pr_slug
-      run: echo "::set-output name=slug::PR-${{ github.event.number }}"   
+      run: echo "slug=PR-${{ github.event.number }}" >> "$GITHUB_OUTPUT"   
 
     # v4.8.0
     - name: Deploy Preview
