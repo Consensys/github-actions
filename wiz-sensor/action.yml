@@ -1,0 +1,88 @@
+# SPDX-License-Identifier: Apache-2.0
+---
+name: Wiz sensor
+description: >-
+  Starts the Wiz GitHub runner sensor on Linux GitHub-hosted runners when
+  WIZ_SENSOR_ENABLED is true and WIZ_SENSOR_TOKEN is set. Otherwise it no-ops,
+  so the sensor can be turned off by changing the org variable.
+
+inputs:
+  enabled:
+    description: >-
+      Value of vars.WIZ_SENSOR_ENABLED. The sensor starts only when this is
+      the string true.
+    required: false
+    default: ""
+  token:
+    description: >-
+      Wiz sensor single-line JSON token from secrets.WIZ_SENSOR_TOKEN. An empty
+      value skips the sensor.
+    required: false
+    default: ""
+
+runs:
+  using: composite
+  steps:
+    - name: Skip Wiz sensor
+      if: github.event_name == 'pull_request_target' || runner.os != 'Linux' || runner.environment != 'github-hosted' || inputs.enabled != 'true' || inputs.token == ''
+      shell: bash
+      env:
+        WIZ_SENSOR_ENABLED: ${{ inputs.enabled }}
+        WIZ_RUNNER_OS: ${{ runner.os }}
+        WIZ_EVENT_NAME: ${{ github.event_name }}
+        WIZ_RUNNER_ENV: ${{ runner.environment }}
+      run: |
+        if [ "$WIZ_EVENT_NAME" = "pull_request_target" ]; then
+          echo "::notice title=Wiz sensor::Skipped because the sensor never starts on pull_request_target."
+        elif [ "$WIZ_RUNNER_OS" != "Linux" ]; then
+          echo "::notice title=Wiz sensor::Skipped because the runner OS is ${WIZ_RUNNER_OS}."
+        elif [ "$WIZ_RUNNER_ENV" != "github-hosted" ]; then
+          echo "::notice title=Wiz sensor::Skipped because the runner is not GitHub-hosted."
+        elif [ "$WIZ_SENSOR_ENABLED" != "true" ]; then
+          echo "::notice title=Wiz sensor::Skipped because WIZ_SENSOR_ENABLED is not true."
+        else
+          echo "::notice title=Wiz sensor::Skipped because WIZ_SENSOR_TOKEN is not set."
+        fi
+
+    # The pinned action puts parsed token fields on the `docker run` command line
+    # and in its error output. GitHub masks the JSON secret as a whole, not the
+    # parsed fields, so register them first. Do not start the sensor if this fails.
+    - name: Mask Wiz sensor token fields
+      id: mask-wiz-sensor-token
+      if: github.event_name != 'pull_request_target' && runner.os == 'Linux' && runner.environment == 'github-hosted' && inputs.enabled == 'true' && inputs.token != ''
+      continue-on-error: true
+      shell: bash
+      env:
+        WIZ_SENSOR_TOKEN: ${{ inputs.token }}
+      run: |
+        node <<'NODE'
+        const raw = process.env.WIZ_SENSOR_TOKEN || "";
+        let token;
+        try {
+          token = JSON.parse(raw);
+        } catch {
+          console.log("::error title=Wiz sensor::Token is not JSON, sensor will not start.");
+          process.exit(1);
+        }
+        if (token === null || typeof token !== "object" || Array.isArray(token)) {
+          console.log("::error title=Wiz sensor::Token is not a JSON object, sensor will not start.");
+          process.exit(1);
+        }
+        const keys = ["registry-username", "registry-password", "wiz-api-client-id", "wiz-api-client-secret"];
+        for (const key of keys) {
+          const value = token[key];
+          if (typeof value !== "string" || value.length === 0) continue;
+          const encoded = value.replace(/%/g, "%25").replace(/\r/g, "%0D").replace(/\n/g, "%0A");
+          process.stdout.write(`::add-mask::${encoded}\n`);
+        }
+        NODE
+
+    - name: Start Wiz sensor
+      if: github.event_name != 'pull_request_target' && runner.os == 'Linux' && runner.environment == 'github-hosted' && inputs.enabled == 'true' && inputs.token != '' && steps.mask-wiz-sensor-token.outcome == 'success'
+      continue-on-error: true
+      uses: wiz-sec-public/wiz-sensor-github-action@2f72488477988739561233bbc10ceff0c53273fd # main, 2026-09-30 (re-review if a newer commit is used)
+      with:
+        token: ${{ inputs.token }}
+        tag: github_runner_private_preview
+        wait-for-ready: "true"
+        allow-self-hosted: "false"
