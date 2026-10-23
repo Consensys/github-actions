@@ -24,6 +24,7 @@ runs:
   using: composite
   steps:
     - name: Skip Wiz sensor
+      continue-on-error: true
       if: github.event_name == 'pull_request_target' || runner.os != 'Linux' || runner.environment != 'github-hosted' || inputs.enabled != 'true' || inputs.token == ''
       shell: bash
       env:
