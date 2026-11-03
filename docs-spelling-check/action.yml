@@ -45,7 +45,7 @@ runs:
     # d89dee975228ae261d22c15adcd03578634d429c = v2.1.1 
     - name: Vale
       if: steps.changed-files.outputs.any_changed == 'true'
-      uses: errata-ai/vale-action@d89dee975228ae261d22c15adcd03578634d429c
+      uses: vale-cli/vale-action@d89dee975228ae261d22c15adcd03578634d429c
       with:
         files: ${{ steps.changed-files.outputs.all_changed_files }}
         vale_flags: "--config .github-actions/docs-spelling-check/.vale.ini"
